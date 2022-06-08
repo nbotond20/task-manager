@@ -1,0 +1,11 @@
+.MuiButton-root{
+    color: #fff;
+    background-color: #000;
+    border-radius: 0;
+    border: 0;
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    margin: 0.5rem;
+    transition: all 0.2s ease-in-out;
+}
