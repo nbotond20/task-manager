@@ -1,435 +1,69 @@
 import * as React from 'react';
-import Typography from '@mui/material/Typography';
 import {
     Alert,
     AlertTitle,
     Button,
-    Chip,
+    Checkbox,
+    ClickAwayListener,
     Dialog,
-    Grow,
-    Skeleton,
-    Snackbar
+    Fade,
+    FormControlLabel,
+    FormGroup,
+    Paper,
+    Popper,
+    Slider,
+    TextField,
+    Typography
 } from '@mui/material';
 import PaginationRounded from '../utils/PaginationRounded';
-import {
-    useDeleteTaskListMutation,
-    useGetTaskListsQuery
-} from '../../state/takskslists/tasksListsApiSlice';
-import Box from '@mui/material/Box';
-import Collapse from '@mui/material/Collapse';
-import IconButton from '@mui/material/IconButton';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import { useGetTasksQuery } from '../../state/tasks/tasksApiSlice';
-import ReactTimeAgo from 'react-time-ago';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectLoggedInUser } from '../../state/auth/authSlice';
-import { v4 } from 'uuid';
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
 import useDocumentTitle from '../utils/useDocumentTitle';
 import CardContainer from '../utils/CardContainer';
-import { useNavigate } from 'react-router-dom';
-import { clear, selectEdit, setEditing } from '../../state/edit/editSlice';
-
-const Row = ({
-    row,
-    index,
-    tasks,
-    children,
-    handleOpenFromRow,
-    handleDeleteFromRow
-}) => {
-    const [open, setOpen] = React.useState(false);
-
-    function compare(a, b) {
-        if (a.title < b.title) {
-            return -1;
-        }
-        if (a.title > b.title) {
-            return 1;
-        }
-        return 0;
-    }
-
-    return (
-        <>
-            {row && tasks && (
-                <>
-                    <Grow
-                        direction="up"
-                        in={true}
-                        {...(true ? { timeout: 250 * (index + 1) } : {})}
-                    >
-                        <TableRow sx={{ borderCollapse: 'collapse' }}>
-                            <TableCell>
-                                <IconButton
-                                    aria-label="expand row"
-                                    size="small"
-                                    onClick={() => setOpen(!open)}
-                                >
-                                    {open ? (
-                                        <KeyboardArrowUpIcon />
-                                    ) : (
-                                        <KeyboardArrowDownIcon />
-                                    )}
-                                </IconButton>
-                                {children}
-                            </TableCell>
-                            <TableCell
-                                component="th"
-                                scope="row"
-                                style={{
-                                    wrap: 'nowrap'
-                                }}
-                            >
-                                {row.title}
-                            </TableCell>
-                            <TableCell
-                                align="center"
-                                style={{
-                                    color:
-                                        row.status === 'published'
-                                            ? '#77DD77'
-                                            : 'text.secondary'
-                                }}
-                            >
-                                {row.status === 'published' ? (
-                                    <Chip
-                                        label="Published"
-                                        color="success"
-                                        variant="outlined"
-                                    />
-                                ) : (
-                                    <Chip
-                                        label="Draft"
-                                        color="primary"
-                                        variant="outlined"
-                                    />
-                                )}
-                            </TableCell>
-                            <TableCell align="center">
-                                {row.tasks?.length}
-                            </TableCell>
-                            <TableCell align="right">
-                                {new Date(row.createdAt).toLocaleString()}
-                            </TableCell>
-                            <TableCell align="right">
-                                <ReactTimeAgo date={new Date(row.updatedAt)} />
-                            </TableCell>
-                            <TableCell align="center" sx={{ padding: '0' }}>
-                                <Button onClick={() => handleOpenFromRow(row)}>
-                                    <EditIcon />
-                                </Button>
-                                <Button
-                                    onClick={() => handleDeleteFromRow(row.id)}
-                                >
-                                    <DeleteIcon color="error" />
-                                </Button>
-                            </TableCell>
-                        </TableRow>
-                    </Grow>
-                    <TableRow>
-                        <TableCell
-                            style={{ paddingBottom: 0, paddingTop: 0 }}
-                            colSpan={7}
-                        >
-                            <Collapse in={open} timeout="auto" unmountOnExit>
-                                <Box sx={{ margin: 1 }}>
-                                    <Typography
-                                        variant="h6"
-                                        gutterBottom
-                                        component="div"
-                                        sx={{
-                                            display: 'flex',
-                                            alignItems: 'center',
-                                            justifyContent: 'space-between'
-                                        }}
-                                    >
-                                        Description
-                                    </Typography>
-                                    <Typography
-                                        variant="body2"
-                                        component="div"
-                                        gutterBottom
-                                        sx={{ color: 'text.secondary' }}
-                                    >
-                                        {row.description}
-                                    </Typography>
-                                </Box>
-                                <Box sx={{ margin: 1 }}>
-                                    <Typography
-                                        variant="h6"
-                                        gutterBottom
-                                        component="div"
-                                    >
-                                        Tasks
-                                    </Typography>
-                                    <Table size="small" aria-label="purchases">
-                                        <TableHead>
-                                            <TableRow>
-                                                <TableCell>Title</TableCell>
-                                                <TableCell>
-                                                    Description
-                                                </TableCell>
-                                                <TableCell align="left">
-                                                    Notes
-                                                </TableCell>
-                                                <TableCell align="right">
-                                                    Points
-                                                </TableCell>
-                                            </TableRow>
-                                        </TableHead>
-                                        <TableBody>
-                                            {row.tasks
-                                                .map((e) => e)
-                                                .sort(compare)
-                                                .map((task) => {
-                                                    return (
-                                                        <TableRow key={task.id}>
-                                                            <TableCell
-                                                                component="th"
-                                                                scope="row"
-                                                                sx={{
-                                                                    color: 'text.secondary'
-                                                                }}
-                                                            >
-                                                                {task.title}
-                                                            </TableCell>
-                                                            <TableCell
-                                                                sx={{
-                                                                    color: 'text.secondary'
-                                                                }}
-                                                            >
-                                                                {
-                                                                    task.description
-                                                                }
-                                                            </TableCell>
-                                                            <TableCell
-                                                                align="right"
-                                                                sx={{
-                                                                    color: 'text.secondary'
-                                                                }}
-                                                            >
-                                                                {task.notes}
-                                                            </TableCell>
-                                                            <TableCell
-                                                                align="right"
-                                                                sx={{
-                                                                    color: 'text.secondary'
-                                                                }}
-                                                            >
-                                                                {task.points}
-                                                            </TableCell>
-                                                        </TableRow>
-                                                    );
-                                                })}
-                                            <TableRow
-                                                key={v4()}
-                                                sx={{
-                                                    boder: 'none',
-                                                    boxShadow: 'none'
-                                                }}
-                                            >
-                                                <TableCell
-                                                    scope="row"
-                                                    sx={{
-                                                        borderBottom: 'none'
-                                                    }}
-                                                />
-                                                <TableCell
-                                                    sx={{
-                                                        borderBottom: 'none'
-                                                    }}
-                                                />
-                                                <TableCell
-                                                    align="right"
-                                                    sx={{
-                                                        borderBottom: 'none'
-                                                    }}
-                                                />
-                                                <TableCell
-                                                    align="right"
-                                                    sx={{
-                                                        fontWeight: 'bold',
-                                                        borderBottom: 'none',
-                                                    }}
-                                                >
-                                                    Summary:{' '}
-                                                    {row.tasks.reduce(
-                                                        (acc, task) =>
-                                                            acc + task.points,
-                                                        0
-                                                    )}
-                                                </TableCell>
-                                            </TableRow>
-                                        </TableBody>
-                                    </Table>
-                                </Box>
-                            </Collapse>
-                        </TableCell>
-                    </TableRow>
-                </>
-            )}
-        </>
-    );
-};
+import Row from './Row';
+import Loading from './Loading';
+import useTasklistService from '../../services/useTasklistService';
+import FilterListIcon from '@mui/icons-material/FilterList';
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import { Controller } from 'react-hook-form';
 
 const TaskLists = () => {
     useDocumentTitle('Task-Manager - Tasklists');
-    const user = useSelector(selectLoggedInUser);
 
-    const itemPerPage = 10;
-    const loadingTime = 1500;
-    const { data, isLoading } = useGetTaskListsQuery();
-
-    const [currentData, setCurrentData] = React.useState(
-        data
-            ? data
-                  .filter((task) => task.userId === user.id)
-                  .sort(
-                      (a, b) =>
-                          new Date(b.updatedAt).getTime() -
-                          new Date(a.updatedAt).getTime()
-                  )
-                  .slice(0, itemPerPage)
-            : []
-    );
-
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
-    const handleNewTaskList = () => {
-        dispatch(
-            setEditing({
-                taskList: {
-                    id: null,
-                    title: null,
-                    description: null,
-                    status: 'draft',
-                    userId: user.id,
-                    tasks: []
-                }
-            })
-        );
-        navigate('/last-edited');
-    };
-
-    const handleEdit = (taskList) => {
-        dispatch(setEditing({ taskList }));
-        navigate('/last-edited');
-    };
-
-    const { data: tasks } = useGetTasksQuery();
-
-    const [loading, setLoading] = React.useState(true);
-    const [page, setPage] = React.useState(1);
-
-    setTimeout(() => {
-        setLoading(isLoading || false);
-    }, loadingTime);
-
-    React.useEffect(() => {
-        setCurrentData(
-            data
-                ? data
-                      .filter((task) => task.userId === user.id)
-                      .sort(
-                          (a, b) =>
-                              new Date(b.updatedAt).getTime() -
-                              new Date(a.updatedAt).getTime()
-                      )
-                      .slice(0, itemPerPage)
-                : []
-        );
-    }, [user, data]);
-
-    const handlePageChange = (event, value) => {
-        setPage(value);
-        setCurrentData(
-            data
-                ? [
-                      ...data
-                          .filter((task) => task.userId === user.id)
-                          .sort(
-                              (a, b) =>
-                                  new Date(b.updatedAt).getTime() -
-                                  new Date(a.updatedAt).getTime()
-                          )
-                          .slice(
-                              value * itemPerPage - itemPerPage,
-                              value * itemPerPage
-                          )
-                  ]
-                : []
-        );
-    };
-
-    const [isOpen, setIsOpen] = React.useState(false);
-    const handleClose = () => {
-        setIsOpen(false);
-    };
-
-    const editing = useSelector(selectEdit);
-    const handleOpen = () => {
-        if (editing !== null) {
-            setIsOpen(true);
-        } else {
-            handleNewTaskList();
-        }
-    };
-
-    const [dataFromRow, setDataFromRow] = React.useState(null);
-    const handleNewOrEdit = () => {
-        if (dataFromRow === null) {
-            handleNewTaskList();
-        } else {
-            handleEdit(dataFromRow);
-        }
-    };
-
-    const handleOpenFromRow = (taskList) => {
-        setDataFromRow(taskList);
-        if (editing !== null) {
-            setIsOpen(true);
-        } else {
-            handleEdit(taskList);
-        }
-    };
-
-    const [deleteTaskList] = useDeleteTaskListMutation();
-    const handleDeleteFromRow = async (taskListID) => {
-        await deleteTaskList(taskListID);
-        if (editing?.id === taskListID) {
-            dispatch(clear());
-        }
-        setOpenSuccesDeleteAlert(true);
-    };
-
-    const [openSuccesDeleteAlert, setOpenSuccesDeleteAlert] =
-        React.useState(false);
+    const {
+        isOpen,
+        currentData,
+        loading,
+        tasks,
+        itemPerPage,
+        data,
+        page,
+        filterOpen,
+        id,
+        anchorEl,
+        control,
+        filterData,
+        handleFilterClick,
+        handleClickAway,
+        onSubmit,
+        onError,
+        handleSubmit,
+        handleClear,
+        handleOpen,
+        handleClose,
+        handleNewOrEdit,
+        handleEdit,
+        handleOpenFromRow,
+        handleDeleteFromRow,
+        handlePageChange
+    } = useTasklistService();
 
     return (
         <CardContainer>
-            <Snackbar
-                open={openSuccesDeleteAlert}
-                autoHideDuration={6000}
-                onClose={(event, reason) => {
-                    if (reason === 'clickaway') {
-                        return;
-                    }
-
-                    setOpenSuccesDeleteAlert(false);
-                }}
-            >
-                <Alert severity="success" sx={{ width: '100%' }}>
-                    Successfully deleted the tasklist!
-                </Alert>
-            </Snackbar>
             <h1
                 style={{
                     textAlign: 'center',
@@ -437,6 +71,360 @@ const TaskLists = () => {
                     position: 'relative'
                 }}
             >
+                <Button
+                    variant={`${filterData ? "contained" : "outlined"}`}
+                    color="primary"
+                    sx={{
+                        position: 'absolute',
+                        left: '0',
+                    }}
+                    onClick={(e) => handleFilterClick(e)}
+                >
+                    <FilterListIcon />
+                    Filter
+                    {filterOpen ? (
+                        <KeyboardArrowDownIcon />
+                    ) : (
+                        <KeyboardArrowRightIcon />
+                    )}
+                </Button>
+                <Dialog
+                    open={filterOpen}
+                    sx={{
+                        zIndex: '0'
+                    }}
+                >
+                    <Popper
+                        id={id}
+                        placement="bottom-start"
+                        anchorEl={anchorEl}
+                        open={filterOpen}
+                        transition
+                    >
+                        {({ TransitionProps }) => (
+                            <ClickAwayListener onClickAway={handleClickAway}>
+                                <Fade {...TransitionProps} timeout={350}>
+                                    <Paper>
+                                        <form
+                                            onSubmit={handleSubmit(
+                                                onSubmit,
+                                                onError
+                                            )}
+                                            style={{
+                                                padding: 30,
+                                                width: '500px'
+                                            }}
+                                        >
+                                            <Typography
+                                                sx={{
+                                                    marginTop: '5px',
+                                                    marginBottom: '15px'
+                                                }}
+                                                variant="h6"
+                                            >
+                                                Filters
+                                            </Typography>
+                                            <Typography
+                                                sx={{
+                                                    marginBottom: '7px'
+                                                }}
+                                                variant="subheading"
+                                            >
+                                                Status
+                                            </Typography>
+
+                                            <FormGroup
+                                                style={{
+                                                    display: 'flex',
+                                                    flexDirection: 'row',
+                                                    gap: '1em'
+                                                }}
+                                            >
+                                                <Controller
+                                                    name="published"
+                                                    control={control}
+                                                    render={({ field }) => (
+                                                        <FormControlLabel
+                                                            control={
+                                                                <Checkbox
+                                                                    {...field}
+                                                                    checked={
+                                                                        field.value
+                                                                    }
+                                                                />
+                                                            }
+                                                            label="Published"
+                                                        />
+                                                    )}
+                                                />
+                                                <Controller
+                                                    name="draft"
+                                                    control={control}
+                                                    render={({ field }) => (
+                                                        <FormControlLabel
+                                                            control={
+                                                                <Checkbox
+                                                                    {...field}
+                                                                    checked={
+                                                                        field.value
+                                                                    }
+                                                                />
+                                                            }
+                                                            label="Draft"
+                                                        />
+                                                    )}
+                                                />
+                                            </FormGroup>
+
+                                            <Typography
+                                                sx={{
+                                                    marginBottom: '7px'
+                                                }}
+                                                variant="subheading"
+                                            >
+                                                Created At
+                                            </Typography>
+
+                                            <FormGroup
+                                                style={{
+                                                    display: 'flex',
+                                                    flexDirection: 'row',
+                                                    gap: '1em',
+                                                    padding: '1em 0'
+                                                }}
+                                            >
+                                                <Controller
+                                                    name="createdAtFrom"
+                                                    control={control}
+                                                    render={({
+                                                        field: {
+                                                            onChange,
+                                                            value
+                                                        },
+                                                        fieldState: { error }
+                                                    }) => (
+                                                        <TextField
+                                                            id="createdAtFrom"
+                                                            label="From"
+                                                            type="datetime-local"
+                                                            InputLabelProps={{
+                                                                shrink: true
+                                                            }}
+                                                            variant="outlined"
+                                                            value={value}
+                                                            onChange={onChange}
+                                                            error={!!error}
+                                                            helperText={
+                                                                error
+                                                                    ? error.message
+                                                                    : null
+                                                            }
+                                                        />
+                                                    )}
+                                                />
+                                                <p>-</p>
+                                                <Controller
+                                                    name="createdAtTo"
+                                                    control={control}
+                                                    render={({
+                                                        field: {
+                                                            onChange,
+                                                            value
+                                                        },
+                                                        fieldState: { error }
+                                                    }) => (
+                                                        <TextField
+                                                            id="createdAtTo"
+                                                            label="To"
+                                                            type="datetime-local"
+                                                            InputLabelProps={{
+                                                                shrink: true
+                                                            }}
+                                                            variant="outlined"
+                                                            value={value}
+                                                            onChange={onChange}
+                                                            error={!!error}
+                                                            helperText={
+                                                                error
+                                                                    ? error.message
+                                                                    : null
+                                                            }
+                                                        />
+                                                    )}
+                                                />
+                                            </FormGroup>
+
+                                            <Typography
+                                                sx={{
+                                                    marginBottom: '7px'
+                                                }}
+                                                variant="subheading"
+                                            >
+                                                Updated At
+                                            </Typography>
+
+                                            <FormGroup
+                                                style={{
+                                                    display: 'flex',
+                                                    flexDirection: 'row',
+                                                    gap: '1em',
+                                                    padding: '1em 0'
+                                                }}
+                                            >
+                                                <Controller
+                                                    name="updatedAtFrom"
+                                                    control={control}
+                                                    render={({
+                                                        field: {
+                                                            onChange,
+                                                            value
+                                                        },
+                                                        fieldState: { error }
+                                                    }) => (
+                                                        <TextField
+                                                            id="updatedAtFrom"
+                                                            label="From"
+                                                            type="datetime-local"
+                                                            InputLabelProps={{
+                                                                shrink: true
+                                                            }}
+                                                            variant="outlined"
+                                                            value={value}
+                                                            onChange={onChange}
+                                                            error={!!error}
+                                                            helperText={
+                                                                error
+                                                                    ? error.message
+                                                                    : null
+                                                            }
+                                                        />
+                                                    )}
+                                                />
+                                                <p>-</p>
+                                                <Controller
+                                                    name="updatedAtTo"
+                                                    control={control}
+                                                    render={({
+                                                        field: {
+                                                            onChange,
+                                                            value
+                                                        },
+                                                        fieldState: { error }
+                                                    }) => (
+                                                        <TextField
+                                                            id="updatedAtTo"
+                                                            label="To"
+                                                            type="datetime-local"
+                                                            InputLabelProps={{
+                                                                shrink: true
+                                                            }}
+                                                            variant="outlined"
+                                                            value={value}
+                                                            onChange={onChange}
+                                                            error={!!error}
+                                                            helperText={
+                                                                error
+                                                                    ? error.message
+                                                                    : null
+                                                            }
+                                                        />
+                                                    )}
+                                                />
+                                            </FormGroup>
+
+                                            <Typography
+                                                sx={{
+                                                    marginBottom: '7px'
+                                                }}
+                                                variant="subheading"
+                                            >
+                                                Task Number
+                                            </Typography>
+
+                                            <FormGroup
+                                                style={{
+                                                    display: 'flex',
+                                                    flexDirection: 'row',
+                                                    gap: '1em',
+                                                    padding: '1em 0'
+                                                }}
+                                            >
+                                                <Controller
+                                                    name="range"
+                                                    control={control}
+                                                    render={({
+                                                        field: {
+                                                            onChange,
+                                                            value
+                                                        },
+                                                        fieldState: { error }
+                                                    }) => (
+                                                        <Slider
+                                                            getAriaLabel={() =>
+                                                                'Temperature range'
+                                                            }
+                                                            value={value}
+                                                            onChange={onChange}
+                                                            valueLabelDisplay="auto"
+                                                            aria-labelledby="range-slider"
+                                                            step={1}
+                                                            max={
+                                                                data
+                                                                    ?.map(
+                                                                        (e) =>
+                                                                            e
+                                                                                .tasks
+                                                                                .length
+                                                                    )
+                                                                    .sort(
+                                                                        (
+                                                                            a,
+                                                                            b
+                                                                        ) =>
+                                                                            a -
+                                                                            b
+                                                                    )
+                                                                    .slice(
+                                                                        -1
+                                                                    )[0]
+                                                            }
+                                                        />
+                                                    )}
+                                                />
+                                            </FormGroup>
+                                            <div
+                                                style={{
+                                                    display: 'flex',
+                                                    flexDirection: 'row',
+                                                    justifyContent: 'center',
+                                                    alignItems: 'center',
+                                                    gap: '1em'
+                                                }}
+                                            >
+                                                <Button
+                                                    variant="outlined"
+                                                    color="primary"
+                                                    onClick={() =>
+                                                        handleClear()
+                                                    }
+                                                >
+                                                    Clear
+                                                </Button>
+                                                <Button
+                                                    type="submit"
+                                                    variant="contained"
+                                                    color="primary"
+                                                >
+                                                    Filter
+                                                </Button>
+                                            </div>
+                                        </form>
+                                    </Paper>
+                                </Fade>
+                            </ClickAwayListener>
+                        )}
+                    </Popper>
+                </Dialog>
                 Tasklists
                 <Button
                     variant="contained"
@@ -559,8 +547,12 @@ const TaskLists = () => {
             >
                 <PaginationRounded
                     count={
-                        isLoading
+                        loading
                             ? 1
+                            : filterData
+                            ? Math.ceil(
+                                  Math.max(filterData.length / itemPerPage, 1)
+                              )
                             : data
                             ? Math.ceil(Math.max(data.length / itemPerPage, 1))
                             : 1
@@ -570,49 +562,6 @@ const TaskLists = () => {
                 />
             </div>
         </CardContainer>
-    );
-};
-
-const Loading = ({ count }) => {
-    const list = Array.from(Array(count).keys());
-
-    return (
-        <>
-            {list.map((e, index) => (
-                <Grow
-                    direction="up"
-                    in={true}
-                    {...(true ? { timeout: 250 * (index + 1) } : {})}
-                    key={index}
-                >
-                    <TableRow
-                        sx={{ '& > *': { borderBottom: 'unset' } }}
-                        key={index}
-                    >
-                        <TableCell>
-                            <IconButton aria-label="expand row" size="small">
-                                <KeyboardArrowDownIcon />
-                            </IconButton>
-                        </TableCell>
-                        <TableCell component="th" scope="row">
-                            <Skeleton variant="text" width={'100%'} />
-                        </TableCell>
-                        <TableCell align="center">
-                            <Skeleton variant="text" width={'100%'} />
-                        </TableCell>
-                        <TableCell align="center">
-                            <Skeleton variant="text" width={'100%'} />
-                        </TableCell>
-                        <TableCell align="right">
-                            <Skeleton variant="text" width={'100%'} />
-                        </TableCell>
-                        <TableCell align="right">
-                            <Skeleton variant="text" width={'100%'} />
-                        </TableCell>
-                    </TableRow>
-                </Grow>
-            ))}
-        </>
     );
 };
 

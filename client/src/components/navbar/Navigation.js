@@ -47,7 +47,7 @@ const Navigation = ({ user, handleCloseNavMenu, editing }) => {
                             </Button>
                         </Link>
                         {editing !== null && (
-                            <Link to={'/last-edited'} style={linkStyle}>
+                            <Link to={'/edit'} style={linkStyle}>
                                 <Button
                                     onClick={handleCloseNavMenu}
                                     sx={{
@@ -56,7 +56,7 @@ const Navigation = ({ user, handleCloseNavMenu, editing }) => {
                                         display: 'block'
                                     }}
                                 >
-                                    Last Edited
+                                    Edit
                                 </Button>
                             </Link>
                         )}

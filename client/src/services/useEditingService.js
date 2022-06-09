@@ -1,11 +1,16 @@
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { clear, selectEdit, updateTasklist } from "../state/edit/editSlice";
-import { useCreateTaskListMutation, useModifyTaskListMutation } from "../state/takskslists/tasksListsApiSlice";
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import toastError from '../actions/toastError';
+import toastSuccess from '../actions/toastSuccess';
+import { clear, selectEdit, updateTasklist } from '../state/edit/editSlice';
+import {
+    useCreateTaskListMutation,
+    useModifyTaskListMutation
+} from '../state/takskslists/tasksListsApiSlice';
 
-const useTasklistsService = () => {
+const useEditingService = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -24,9 +29,6 @@ const useTasklistsService = () => {
     const [createTaskList] = useCreateTaskListMutation();
     const [modifyTaskList] = useModifyTaskListMutation();
 
-    const [openSuccessAlert, setOpenSuccessAlert] = useState(false);
-    const [openErrorAlert, setOpenErrorAlert] = useState(false);
-
     const { handleSubmit, control, watch, getValues } = useForm({
         defaultValues: {
             title: editing?.title ? editing?.title : '',
@@ -36,7 +38,7 @@ const useTasklistsService = () => {
     });
 
     const onError = (errors, e) => {
-        setOpenErrorAlert(true);
+        toastError(`Error ${editing?.id ? 'updating' : 'creating'} tasklist!`);
     };
 
     const [isClosing, setIsClosing] = useState(false);
@@ -78,7 +80,9 @@ const useTasklistsService = () => {
         } catch (e) {}
 
         if (result) {
-            setOpenSuccessAlert(true);
+            toastSuccess(
+                `Tasklist ${editing?.id ? 'updated' : 'created'} successfully!`
+            );
             if (isClosing) {
                 setTimeout(() => {
                     navigate('/tasklists');
@@ -108,26 +112,30 @@ const useTasklistsService = () => {
                 );
             }
         } else {
-            setOpenErrorAlert(true);
+            toastError(
+                `Error ${editing?.id ? 'updating' : 'creating'} tasklist!`
+            );
         }
+    };
+
+    const cancel = () => {
+        dispatch(clear());
+        navigate('/tasklists');
     };
 
     return {
         editing,
-        handleSubmit,
         control,
-        watch,
+        isClosing,
+        tasks,
+        cancel,
+        handleSubmit,
         getValues,
+        watch,
         onError,
         onSubmit,
-        openSuccessAlert,
-        setOpenSuccessAlert,
-        openErrorAlert,
-        setOpenErrorAlert,
-        isClosing,
-        setIsClosing,
-        tasks
-    }
+        setIsClosing
+    };
 };
 
-export default useTasklistsService;
+export default useEditingService;

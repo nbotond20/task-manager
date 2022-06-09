@@ -49,28 +49,24 @@ const Burger = ({
                     display: { xs: 'block', md: 'none' }
                 }}
             >
-                <MenuItem onClick={handleCloseNavMenu}>
-                    <Typography textAlign="center">
-                        <Link to={'/tasks'} style={linkStyle}>
-                            Tasks
-                        </Link>
-                    </Typography>
-                </MenuItem>
-                <MenuItem onClick={handleCloseNavMenu}>
-                    <Typography textAlign="center">
-                        <Link to={'/tasklists'} style={linkStyle}>
-                            TaskLists
-                        </Link>
-                    </Typography>
-                </MenuItem>
-                {editing !== null && (
+                <Link to={'/tasks'} style={linkStyle}>
                     <MenuItem onClick={handleCloseNavMenu}>
-                        <Typography textAlign="center">
-                            <Link to={'/last-edited'} style={linkStyle}>
-                                Last Edited
-                            </Link>
-                        </Typography>
+                        <Typography textAlign="center">Tasks</Typography>
                     </MenuItem>
+                </Link>
+                <Link to={'/tasklists'} style={linkStyle}>
+                    <MenuItem onClick={handleCloseNavMenu}>
+                        <Typography textAlign="center">TaskLists</Typography>
+                    </MenuItem>
+                </Link>
+                {editing !== null && (
+                    <Link to={'/edit'} style={linkStyle}>
+                        <MenuItem onClick={handleCloseNavMenu}>
+                            <Typography textAlign="center">
+                                Edit
+                            </Typography>
+                        </MenuItem>
+                    </Link>
                 )}
             </Menu>
         </Box>

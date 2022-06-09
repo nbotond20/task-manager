@@ -17,38 +17,23 @@ import CardContainer from '../utils/CardContainer';
 import ReactTimeAgo from 'react-time-ago';
 import { Link } from 'react-router-dom';
 import { Controller } from 'react-hook-form';
-import ErrorAlert from './ErrorAlert';
-import SuccesAlert from './SuccesAlert';
-import useTasklistsService from '../../services/useTasklistsService';
+import useEditingService from '../../services/useEditingService';
 
 const Edit = () => {
     const {
         editing,
         control,
-        openSuccessAlert,
-        openErrorAlert,
         tasks,
+        cancel,
         setIsClosing,
         onSubmit,
         handleSubmit,
         watch,
-        onError,
-        setOpenSuccessAlert,
-        setOpenErrorAlert
-    } = useTasklistsService();
+        onError
+    } = useEditingService();
 
     return (
         <>
-            <SuccesAlert
-                openSuccessAlert={openSuccessAlert}
-                setOpenSuccessAlert={setOpenSuccessAlert}
-                editing={editing}
-            />
-            <ErrorAlert
-                openErrorAlert={openErrorAlert}
-                setOpenErrorAlert={setOpenErrorAlert}
-                editing={editing}
-            />
             <CardContainer>
                 <form onSubmit={handleSubmit(onSubmit, onError)}>
                     <div
@@ -357,7 +342,17 @@ const Edit = () => {
                             onClick={() => setIsClosing(true)}
                             variant="contained"
                         >
-                            Close
+                            Save & Close
+                        </Button>
+                        <Button
+                            onClick={() => cancel(true)}
+                            variant="outlined"
+                            style={{
+                                position: 'absolute',
+                                right: '1em'
+                            }}
+                        >
+                            Cancel
                         </Button>
                     </div>
                 </form>

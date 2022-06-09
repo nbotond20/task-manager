@@ -15,6 +15,8 @@ import { load, setEditing, setUserId } from './state/edit/editSlice';
 import fetchLocalUser from './actions/fetchLocalUser';
 import fetchLocalTasklist from './actions/fetchLocalTasklist';
 import loginAction from './actions/login';
+import CookieConsent from './components/cookie/CookieConsent';
+import Toast from './components/utils/Toast';
 
 function App() {
     const dispatch = useDispatch();
@@ -35,6 +37,8 @@ function App() {
 
     return (
         <>
+            <Toast />
+            <CookieConsent />
             <BrowserRouter>
                 <NavBar />
                 <Routes>
@@ -51,7 +55,7 @@ function App() {
                         }
                     />
                     <Route
-                        path="last-edited"
+                        path="edit"
                         element={
                             <RequireAuth>
                                 <Edit />
