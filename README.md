@@ -1,5 +1,27 @@
 # Feladatsorok alkalmazás
 
+## Telepítés
+
+### A kliens
+
+A kliens forráskódja a `client` mappában található. Telepíteni és indítani kell lokálisan:
+
+```
+cd client
+npm install
+npm start
+```
+
+### A szerver
+
+A szerver forráskódja a `rest-api` mappában található. Telepíteni és indítani kell lokálisan:
+
+```
+cd rest-api
+npm install
+npm start
+```
+
 ## Leírás
 
 Ez egy olyan webes alkalmazás, amelyben egy tanárnak lehetősége van egy feladatsort összeállítani, pl. óra vagy dolgozat céljából. A tanár létrehoz egy új feladatsort, majd a feladatbankban a feladatok között böngészve egy-egy feladatot hozzáad a szerkesztésre jelölt feladatsorhoz. A feladatok és a feladatsorok listázhatók, részleteik megtekinthetők, a feladatsorok szerkeszthetők.
