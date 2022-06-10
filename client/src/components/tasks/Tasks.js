@@ -25,7 +25,7 @@ export default function Tasks({ itemPerPage = 10, loadingTime = 1500 }) {
         setLoading,
         handleSelect,
         handleExpand,
-        handlePageChange,
+        handlePageChange
     } = useTasksService({ itemPerPage });
 
     setTimeout(() => {
@@ -40,6 +40,26 @@ export default function Tasks({ itemPerPage = 10, loadingTime = 1500 }) {
                     There are no tasks available - create one!
                 </Alert>
             )}
+            <Accordion
+                sx={{
+                    boxShadow: 'none',
+                    margin: '0',
+                    fontWeight: 'bold',
+                }}
+            >
+                <AccordionSummary
+                    sx={{
+                        boxShadow: 'none',
+                    }}
+                >
+                    <Typography sx={{ width: '33%', flexShrink: 0 }}>
+                        Title
+                    </Typography>
+                    <Typography sx={{ color: 'text.secondary' }}>
+                        Description
+                    </Typography>
+                </AccordionSummary>
+            </Accordion>
             {!loading &&
                 data?.tasks?.map((task, index) => (
                     <Grow

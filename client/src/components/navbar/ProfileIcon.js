@@ -8,9 +8,7 @@ const ProfileIcon = ({
     anchorElUser,
     handleCloseUserMenu
 }) => {
-
     return (
-
         <Box sx={{ flexGrow: 0 }}>
             <ProfileIconTooltip
                 user={user}

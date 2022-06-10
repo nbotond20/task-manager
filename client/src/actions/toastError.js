@@ -1,6 +1,6 @@
 import { toast } from "react-toastify";
 
-const toastError = (msg='Default message', time=2500) => {
+const toastError = (msg='Default message', time=2000) => {
     toast.error(msg, {
         position: 'bottom-left',
         autoClose: time,

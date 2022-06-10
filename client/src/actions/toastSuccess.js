@@ -1,6 +1,6 @@
 import { toast } from 'react-toastify';
 
-const toastSuccess = (msg = 'Default message', time = 2500) => {
+const toastSuccess = (msg = 'Default message', time = 2000) => {
     toast.success(msg, {
         position: 'bottom-left',
         autoClose: time,

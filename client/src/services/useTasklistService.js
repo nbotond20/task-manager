@@ -11,34 +11,36 @@ import {
 } from '../state/takskslists/tasksListsApiSlice';
 import { useGetTasksQuery } from '../state/tasks/tasksApiSlice';
 
-const useTasklistService = () => {
+const curData = (filterData, data, user, itemPerPage, page) => {
+    return filterData
+        ? filterData
+              .filter((task) => task.userId === user.id)
+              .sort(
+                  (a, b) =>
+                      new Date(b.updatedAt).getTime() -
+                      new Date(a.updatedAt).getTime()
+              )
+              .slice(page * itemPerPage - itemPerPage, page * itemPerPage)
+        : data
+        ? data
+              .filter((task) => task.userId === user.id)
+              .sort(
+                  (a, b) =>
+                      new Date(b.updatedAt).getTime() -
+                      new Date(a.updatedAt).getTime()
+              )
+              .slice(page * itemPerPage - itemPerPage, page * itemPerPage)
+        : [];
+};
+
+const useTasklistService = ({itemPerPage}) => {
     const user = useSelector(selectLoggedInUser);
 
-    const itemPerPage = 10;
-    const loadingTime = 1500;
     const { data, isLoading } = useGetTaskListsQuery();
     const [filterData, setFilterData] = useState(null);
 
     const [currentData, setCurrentData] = useState(
-        filterData
-            ? filterData
-                  .filter((task) => task.userId === user.id)
-                  .sort(
-                      (a, b) =>
-                          new Date(b.updatedAt).getTime() -
-                          new Date(a.updatedAt).getTime()
-                  )
-                  .slice(0, itemPerPage)
-            : data
-            ? data
-                  .filter((task) => task.userId === user.id)
-                  .sort(
-                      (a, b) =>
-                          new Date(b.updatedAt).getTime() -
-                          new Date(a.updatedAt).getTime()
-                  )
-                  .slice(0, itemPerPage)
-            : []
+        curData(filterData, data, user, itemPerPage, 1)
     );
 
     const navigate = useNavigate();
@@ -69,69 +71,14 @@ const useTasklistService = () => {
     const [loading, setLoading] = useState(true);
     const [page, setPage] = useState(1);
 
-    setTimeout(() => {
-        setLoading(isLoading || false);
-    }, loadingTime);
 
     useEffect(() => {
-        setCurrentData(
-            filterData
-                ? filterData
-                      .filter((task) => task.userId === user.id)
-                      .sort(
-                          (a, b) =>
-                              new Date(b.updatedAt).getTime() -
-                              new Date(a.updatedAt).getTime()
-                      )
-                      .slice(
-                          page * itemPerPage - itemPerPage,
-                          page * itemPerPage
-                      )
-                : data
-                ? data
-                      .filter((task) => task.userId === user.id)
-                      .sort(
-                          (a, b) =>
-                              new Date(b.updatedAt).getTime() -
-                              new Date(a.updatedAt).getTime()
-                      )
-                      .slice(
-                          page * itemPerPage - itemPerPage,
-                          page * itemPerPage
-                      )
-                : []
-        );
+        setCurrentData(curData(filterData, data, user, itemPerPage, page));
     }, [user, data, filterData, page, itemPerPage]);
 
     const handlePageChange = (event, value) => {
         setPage(value);
-        setCurrentData(
-            filterData
-                ? filterData
-                      .filter((task) => task.userId === user.id)
-                      .sort(
-                          (a, b) =>
-                              new Date(b.updatedAt).getTime() -
-                              new Date(a.updatedAt).getTime()
-                      )
-                      .slice(
-                          value * itemPerPage - itemPerPage,
-                          value * itemPerPage
-                      )
-                : data
-                ? data
-                      .filter((task) => task.userId === user.id)
-                      .sort(
-                          (a, b) =>
-                              new Date(b.updatedAt).getTime() -
-                              new Date(a.updatedAt).getTime()
-                      )
-                      .slice(
-                          value * itemPerPage - itemPerPage,
-                          value * itemPerPage
-                      )
-                : []
-        );
+        setCurrentData(curData(filterData, data, user, itemPerPage, value));
     };
 
     const [isOpen, setIsOpen] = useState(false);
@@ -204,7 +151,7 @@ const useTasklistService = () => {
                 data
                     ?.map((e) => e.tasks.length)
                     .sort((a, b) => a - b)
-                    .slice(-1)[0]
+                    .slice(-1)[0] || 10
             ]
         }
     });
@@ -263,22 +210,7 @@ const useTasklistService = () => {
         ];
         setFilterData(tempData);
         setFilterOpen(false);
-        setCurrentData(
-            data
-                ? [
-                      ...tempData
-                          .sort(
-                              (a, b) =>
-                                  new Date(b.updatedAt).getTime() -
-                                  new Date(a.updatedAt).getTime()
-                          )
-                          .slice(
-                              page * itemPerPage - itemPerPage,
-                              page * itemPerPage
-                          )
-                  ]
-                : []
-        );
+        setCurrentData(curData(tempData, data, user, itemPerPage, page));
     };
 
     const handleClear = () => {
@@ -299,33 +231,7 @@ const useTasklistService = () => {
                     .slice(-1)[0]
             ]
         });
-        setCurrentData(
-            filterData
-                ? filterData
-                      .filter((task) => task.userId === user.id)
-                      .sort(
-                          (a, b) =>
-                              new Date(b.updatedAt).getTime() -
-                              new Date(a.updatedAt).getTime()
-                      )
-                      .slice(
-                          page * itemPerPage - itemPerPage,
-                          page * itemPerPage
-                      )
-                : data
-                ? data
-                      .filter((task) => task.userId === user.id)
-                      .sort(
-                          (a, b) =>
-                              new Date(b.updatedAt).getTime() -
-                              new Date(a.updatedAt).getTime()
-                      )
-                      .slice(
-                          page * itemPerPage - itemPerPage,
-                          page * itemPerPage
-                      )
-                : []
-        );
+        setCurrentData(curData(filterData, data, user, itemPerPage, page));
     };
 
     return {
@@ -333,7 +239,6 @@ const useTasklistService = () => {
         currentData,
         loading,
         tasks,
-        itemPerPage,
         data,
         page,
         filterOpen,
@@ -341,6 +246,8 @@ const useTasklistService = () => {
         anchorEl,
         control,
         filterData,
+        isLoading,
+        setLoading,
         handleFilterClick,
         handleClickAway,
         onSubmit,

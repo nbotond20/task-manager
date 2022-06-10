@@ -49,7 +49,7 @@ const Register = () => {
             navigate('/login', { replace: true });
         } catch (err) {
             newErrors.username = 'Register error';
-            setErrors({...newErrors});
+            setErrors({ ...newErrors });
         }
     };
 
