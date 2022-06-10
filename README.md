@@ -104,6 +104,7 @@ Egy feladatsorra kattintva ugyanezen az oldalon megjelenik a feladatsor:
 - funkciók
   - ha nincs szerkesztés alatt álló feladatsor,
     - akkor "Szerkeszt" gombra kattintva az adott feladat szerkesztésre jelölődik, és a _Szerkesztett feladatsor_ oldalra kerülünk.
+  - szűrés _státusz, létrehozás dátuma, módosítás dátuma_ és _feladatok száma_ alapján
 
 Ezen az oldalon lehetőség van új feladatsor összeállítását kezdeményezni ("Új feladatsor" gomb), ekkor a _Szerkesztett feladatsor_ oldalra kerülünk.
 
