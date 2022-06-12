@@ -49,7 +49,6 @@ export const editSlice = createSlice({
             state.taskList = null;
             localStorage.removeItem(`taskList-${state.userId}`);
         },
-        
     }
 });
 

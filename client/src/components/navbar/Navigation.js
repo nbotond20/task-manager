@@ -1,8 +1,9 @@
 import { Button } from '@mui/material';
 import { Box } from '@mui/system';
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import logoutAction from '../../actions/logout';
+import './css/ActiveLink.css';
 
 const linkStyle = {
     textDecoration: 'none',
@@ -17,10 +18,11 @@ const Navigation = ({ user, handleCloseNavMenu, editing }) => {
             <Box
                 sx={{
                     flexGrow: 1,
-                    display: { xs: 'none', md: 'flex' }
+                    display: { xs: 'none', md: 'flex' },
+                    gap: '1em'
                 }}
             >
-                <Link to={'/tasks'} style={linkStyle}>
+                <NavLink to={'/tasks'} style={linkStyle}>
                     <Button
                         onClick={handleCloseNavMenu}
                         sx={{
@@ -31,10 +33,10 @@ const Navigation = ({ user, handleCloseNavMenu, editing }) => {
                     >
                         Tasks
                     </Button>
-                </Link>
+                </NavLink>
                 {user ? (
                     <>
-                        <Link to={'/tasklists'} style={linkStyle}>
+                        <NavLink to={'/tasklists'} style={linkStyle}>
                             <Button
                                 onClick={handleCloseNavMenu}
                                 sx={{
@@ -45,9 +47,9 @@ const Navigation = ({ user, handleCloseNavMenu, editing }) => {
                             >
                                 Tasklists
                             </Button>
-                        </Link>
+                        </NavLink>
                         {editing !== null && (
-                            <Link to={'/edit'} style={linkStyle}>
+                            <NavLink to={'/edit'} style={linkStyle}>
                                 <Button
                                     onClick={handleCloseNavMenu}
                                     sx={{
@@ -58,7 +60,7 @@ const Navigation = ({ user, handleCloseNavMenu, editing }) => {
                                 >
                                     Edit
                                 </Button>
-                            </Link>
+                            </NavLink>
                         )}
                     </>
                 ) : (
@@ -75,7 +77,8 @@ const Navigation = ({ user, handleCloseNavMenu, editing }) => {
                         sx={{
                             my: 2,
                             color: 'lightgray',
-                            display: 'block'
+                            display: 'block',
+                            marginInline: '0.5em'
                         }}
                     >
                         Log out
@@ -83,31 +86,33 @@ const Navigation = ({ user, handleCloseNavMenu, editing }) => {
                 </Link>
             ) : (
                 <>
-                    <Link to={'/login'} style={linkStyle}>
+                    <NavLink to={'/login'} style={linkStyle}>
                         <Button
                             onClick={handleCloseNavMenu}
                             sx={{
                                 my: 2,
                                 color: 'lightgray',
-                                display: 'block'
+                                display: 'block',
+                                marginInline: '0.5em'
                             }}
                         >
                             Login
                         </Button>
-                    </Link>
+                    </NavLink>
                     /
-                    <Link to={'/register'} style={linkStyle}>
+                    <NavLink to={'/register'} style={linkStyle}>
                         <Button
                             onClick={handleCloseNavMenu}
                             sx={{
                                 my: 2,
                                 color: 'lightgray',
-                                display: 'block'
+                                display: 'block',
+                                marginInline: '0.5em'
                             }}
                         >
                             Register
                         </Button>
-                    </Link>
+                    </NavLink>
                 </>
             )}
         </>
