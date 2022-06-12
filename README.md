@@ -58,6 +58,7 @@ A háttérrendszerben felvett adatok böngészése lehetséges itt. Az oldal 10 
       - ha nincs aktív feladatsor szerkesztés,
         - akkor egy új feladatsor szerkesztése kezdődik, és
       - a feladatot a feladatsorhoz adjuk;
+    - megjelenik egy "Törlés" gomb amire kattintva töröljük a feladatot
   - ha a feladat már ki van választva
     - akkor csak jelezzük, hogy már "Kiválasztva"
 
@@ -105,6 +106,7 @@ Egy feladatsorra kattintva ugyanezen az oldalon megjelenik a feladatsor:
   - ha nincs szerkesztés alatt álló feladatsor,
     - akkor "Szerkeszt" gombra kattintva az adott feladat szerkesztésre jelölődik, és a _Szerkesztett feladatsor_ oldalra kerülünk.
   - szűrés _státusz, létrehozás dátuma, módosítás dátuma_ és _feladatok száma_ alapján
+  - feladatsor törlése
 
 Ezen az oldalon lehetőség van új feladatsor összeállítását kezdeményezni ("Új feladatsor" gomb), ekkor a _Szerkesztett feladatsor_ oldalra kerülünk.
 
@@ -122,9 +124,11 @@ Csak bejelentkezve érhető el, és ha van új vagy meglévő feladatsor szerkes
   - feladat leírása
   - megjegyzés a feladathoz (szerkeszthető)
   - pontszám (szerkeszthető)
+  - "Törlés" gomb megjelenik amire kattintva eltávolítjuk az adott feladatot a feladatsorból
 - funkciók
   - "Mentés": a feladatsor mentése (új vagy módosítás)
   - "Szerkesztés lezárása": szerkesztés lezárása, visszatérés a _Feladatsoraim_ oldalra
+  - "Mégse": a szerkesztés lezárása mentés nélkül, visszatérés a _Feladatsoraim_ oldalra
 
 ### Profil (Profile)
 

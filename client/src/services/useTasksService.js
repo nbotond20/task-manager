@@ -1,8 +1,10 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import toastError from "../actions/toastError";
+import toastSuccess from "../actions/toastSuccess";
 import { selectLoggedInUser } from "../state/auth/authSlice";
 import { addTask, selectEdit, setEditing } from "../state/edit/editSlice";
-import { useGetTasksRangeQuery } from "../state/tasks/tasksApiSlice";
+import { useDeleteTaskMutation, useGetTasksRangeQuery } from "../state/tasks/tasksApiSlice";
 
 const useTasksService = ({itemPerPage}) => {
     const user = useSelector(selectLoggedInUser);
@@ -47,6 +49,24 @@ const useTasksService = ({itemPerPage}) => {
         setPage(value);
     };
 
+    const [deleteTask] = useDeleteTaskMutation();
+
+    const handleDelete = async (e, id) => {
+        e.stopPropagation();
+        const result = await deleteTask(id);
+        if(!result?.error){
+            toastSuccess(
+                `Task deleted successfully!`, 
+                1000
+            );
+        }else{
+            toastError(
+                `Error deleting task!`,
+                1000
+            );
+        }
+    }
+
     return{
         user,
         editing,
@@ -59,7 +79,8 @@ const useTasksService = ({itemPerPage}) => {
         handleSelect,
         handleExpand,
         handlePageChange,
-        expanded
+        expanded,
+        handleDelete
     }
 }
 

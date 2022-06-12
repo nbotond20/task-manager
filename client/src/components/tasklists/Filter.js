@@ -146,7 +146,7 @@ const Filter = ({
                                             display: 'flex',
                                             flexDirection: 'row',
                                             gap: '1em',
-                                            padding: '1em 0'
+                                            padding: '1em 0',
                                         }}
                                     >
                                         <Controller

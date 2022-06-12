@@ -123,6 +123,30 @@ const useEditingService = () => {
         navigate('/tasklists');
     };
 
+    const handleDelete = (id) => {
+        dispatch(
+            updateTasklist({
+                taskList: {
+                    id: editing.id,
+                    title: getValues('title'),
+                    description: getValues('description'),
+                    status: getValues('status') ? 'published' : 'draft',
+                    createdAt: editing.createdAt,
+                    updatedAt: editing.updatedAt,
+                    tasks: tasks?.map((e) => ({
+                        id: e.id,
+                        title: e.title,
+                        description: e.description,
+                        notes: getValues(`task-notes[${e.id}]`),
+                        points: parseInt(
+                            getValues(`task-points[${e.id}]`)
+                        )
+                    })).filter((e) => e.id !== id)
+                }
+            })
+        );
+    };
+
     return {
         editing,
         control,
@@ -134,7 +158,8 @@ const useEditingService = () => {
         watch,
         onError,
         onSubmit,
-        setIsClosing
+        setIsClosing,
+        handleDelete
     };
 };
 

@@ -1,9 +1,22 @@
-import { Alert, FormControl, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField } from "@mui/material";
-import { Controller } from "react-hook-form";
-import { Link } from "react-router-dom";
+import {
+    Alert,
+    FormControl,
+    Paper,
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableHead,
+    TableRow,
+    TextField
+} from '@mui/material';
+import { Controller } from 'react-hook-form';
+import { Link } from 'react-router-dom';
 import style from './css/Edit.module.css';
+import DeleteIcon from '@mui/icons-material/Delete';
 
-const EditTable = ({tasks, control, setIsClosing, onSubmit}) => {
+const EditTable = ({ tasks, control, setIsClosing, onSubmit, handleDelete }) => {
+
     return (
         <div className={style.tableContainer}>
             <TableContainer component={Paper}>
@@ -55,7 +68,9 @@ const EditTable = ({tasks, control, setIsClosing, onSubmit}) => {
                                                 )}
                                             />
                                         </TableCell>
-                                        <TableCell align="center">
+                                        <TableCell align="center" style={{
+                                            padding: '0'
+                                        }}>
                                             <Controller
                                                 name={`task-points[${task.id}]`}
                                                 control={control}
@@ -83,6 +98,20 @@ const EditTable = ({tasks, control, setIsClosing, onSubmit}) => {
                                                         />
                                                     </FormControl>
                                                 )}
+                                            />
+                                        </TableCell>
+
+                                        <TableCell
+                                            style={{
+                                                padding: '0 1em 0 0',
+                                            }}
+                                        >
+                                            <DeleteIcon
+                                                color="error"
+                                                onClick={() => handleDelete(task.id)}
+                                                style={{
+                                                    cursor: 'pointer',
+                                                }}
                                             />
                                         </TableCell>
                                     </TableRow>

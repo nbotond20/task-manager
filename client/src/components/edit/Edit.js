@@ -14,7 +14,8 @@ const Edit = () => {
         onSubmit,
         handleSubmit,
         watch,
-        onError
+        onError,
+        handleDelete,
     } = useEditingService();
 
     return (
@@ -27,6 +28,7 @@ const Edit = () => {
                         control={control}
                         setIsClosing={setIsClosing}
                         onSubmit={onSubmit}
+                        handleDelete={handleDelete}
                     />
                     <Buttons setIsClosing={setIsClosing} cancel={cancel} />
                 </form>

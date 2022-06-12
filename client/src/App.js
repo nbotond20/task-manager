@@ -55,7 +55,7 @@ function App() {
                         }
                     />
                     <Route
-                        path="edit"
+                        path="/edit"
                         element={
                             <RequireAuth>
                                 <Edit />
