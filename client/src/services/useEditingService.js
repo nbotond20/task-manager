@@ -84,10 +84,8 @@ const useEditingService = () => {
                 `Tasklist ${editing?.id ? 'updated' : 'created'} successfully!`
             );
             if (isClosing) {
-                setTimeout(() => {
-                    navigate('/tasklists');
-                    dispatch(clear());
-                }, 1000);
+                navigate('/tasklists');
+                dispatch(clear());
             } else {
                 dispatch(
                     updateTasklist({
@@ -133,15 +131,15 @@ const useEditingService = () => {
                     status: getValues('status') ? 'published' : 'draft',
                     createdAt: editing.createdAt,
                     updatedAt: editing.updatedAt,
-                    tasks: tasks?.map((e) => ({
-                        id: e.id,
-                        title: e.title,
-                        description: e.description,
-                        notes: getValues(`task-notes[${e.id}]`),
-                        points: parseInt(
-                            getValues(`task-points[${e.id}]`)
-                        )
-                    })).filter((e) => e.id !== id)
+                    tasks: tasks
+                        ?.map((e) => ({
+                            id: e.id,
+                            title: e.title,
+                            description: e.description,
+                            notes: getValues(`task-notes[${e.id}]`),
+                            points: parseInt(getValues(`task-points[${e.id}]`))
+                        }))
+                        .filter((e) => e.id !== id)
                 }
             })
         );

@@ -1,11 +1,24 @@
-import { Box, Button, Chip, Collapse, Grow, IconButton, Table, TableBody, TableCell, TableHead, TableRow, Typography } from "@mui/material";
+import {
+    Box,
+    Button,
+    Chip,
+    Collapse,
+    Grow,
+    IconButton,
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableRow,
+    Typography
+} from '@mui/material';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import ReactTimeAgo from "react-time-ago";
+import ReactTimeAgo from 'react-time-ago';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import React from "react";
-import {v4} from "uuid";
+import React from 'react';
+import { v4 } from 'uuid';
 
 const Row = ({
     row,
@@ -58,7 +71,8 @@ const Row = ({
                                     wrap: 'nowrap'
                                 }}
                             >
-                                {row.title}
+                                {row.title.slice(0, 25)}
+                                {row.title.length > 25 ? '...' : ''}
                             </TableCell>
                             <TableCell
                                 align="center"
@@ -110,6 +124,28 @@ const Row = ({
                             colSpan={7}
                         >
                             <Collapse in={open} timeout="auto" unmountOnExit>
+                                <Box sx={{ margin: 1 }}>
+                                    <Typography
+                                        variant="h6"
+                                        gutterBottom
+                                        component="div"
+                                        sx={{
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'space-between'
+                                        }}
+                                    >
+                                        Title
+                                    </Typography>
+                                    <Typography
+                                        variant="body2"
+                                        component="div"
+                                        gutterBottom
+                                        sx={{ color: 'text.secondary' }}
+                                    >
+                                        {row.title}
+                                    </Typography>
+                                </Box>
                                 <Box sx={{ margin: 1 }}>
                                     <Typography
                                         variant="h6"
