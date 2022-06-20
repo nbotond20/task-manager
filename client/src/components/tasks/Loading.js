@@ -29,11 +29,10 @@ const Loading = ({ count }) => {
                             boxShadow: 'none',
                             margin: '0',
                             border: 'none',
-                            backgroundColor: '#fafafa'
                         }}
                     >
                         <AccordionSummary
-                            expandIcon={<ExpandMoreIcon />}
+                            expandIcon={<ExpandMoreIcon color="secondary"/>}
                             sx={{
                                 boxShadow: 'none'
                             }}

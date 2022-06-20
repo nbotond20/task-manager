@@ -10,6 +10,31 @@ import CookieConsent from './components/cookie/CookieConsent';
 import Toast from './components/utils/Toast';
 import loadTasklist from './actions/loadTasklist';
 import AnimatedRoutes from './AnimatedRoutes';
+import { createTheme } from '@mui/material';
+import { ThemeProvider } from '@emotion/react';
+
+export const theme = createTheme({
+    palette: {
+        type: 'dark',
+        primary: {
+            main: '#44A574',
+        },
+        secondary: {
+            main: 'rgb(57,140,95)',
+        },
+        background: {
+            default: '#141C23',
+            paper: '#232A2E',
+        },
+        text: {
+            primary: 'rgba(255,255,255,0.84)',
+            secondary: 'rgba(255,255,255,0.54)',
+            disabled: 'rgba(255,255,255,0.38)',
+            hint: 'rgba(255,255,255,0.38)',
+        },
+        divider: '#ffffff',
+    },
+});
 
 function App() {
     const dispatch = useDispatch();
@@ -30,12 +55,14 @@ function App() {
 
     return (
         <>
-            <Toast />
-            <CookieConsent />
-            <BrowserRouter>
-                <NavBar />
-                <AnimatedRoutes />
-            </BrowserRouter>
+            <ThemeProvider theme={theme}>
+                <Toast />
+                <CookieConsent />
+                <BrowserRouter>
+                    <NavBar />
+                    <AnimatedRoutes />
+                </BrowserRouter>
+            </ThemeProvider>
         </>
     );
 }

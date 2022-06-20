@@ -71,7 +71,7 @@ const Header = ({ control, watch, editing }) => {
                     ) : (
                         <Chip
                             label="Draft"
-                            color="primary"
+                            color="info"
                             variant="outlined"
                         />
                     )}

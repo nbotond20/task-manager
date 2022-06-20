@@ -28,7 +28,7 @@ export default function SearchBar({ search, setSearch }) {
                                     sx={{ p: '10px' }}
                                     aria-label="search"
                                 >
-                                    <SearchIcon />
+                                    <SearchIcon color="secondary"/>
                                 </IconButton>
                             ) : (
                                 <IconButton

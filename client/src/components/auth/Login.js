@@ -9,8 +9,8 @@ import useDocumentTitle from '../utils/useDocumentTitle';
 import { setUserId } from '../../state/edit/editSlice';
 import loginAction from '../../actions/login';
 import loadTasklist from '../../actions/loadTasklist';
-import AnimatedDiv from '../utils/AnimatedDiv';
 import { selectLoggedInUser } from '../../state/auth/authSlice';
+import { motion } from 'framer-motion';
 
 const Login = () => {
     const user = useSelector(selectLoggedInUser);
@@ -83,12 +83,16 @@ const Login = () => {
     }
 
     return (
-        <AnimatedDiv>
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+        >
             <CenterContainer className={style.container}>
                 <form onSubmit={handleSubmit} className={style.form}>
                     <h1 className={style.title}>Login</h1>
                     <TextField
-                        variant="standard"
+                        variant="outlined"
                         type="text"
                         id="username"
                         name="username"
@@ -101,7 +105,7 @@ const Login = () => {
                     />
                     <br />
                     <TextField
-                        variant="standard"
+                        variant="outlined"
                         type="password"
                         id="password"
                         name="password"
@@ -110,6 +114,7 @@ const Login = () => {
                         error={errors.password !== undefined}
                         helperText={errors.password}
                         onChange={handleChange}
+                        color="secondary"
                     />
                     <br />
                     <Button variant="contained" type="submit">
@@ -117,11 +122,18 @@ const Login = () => {
                     </Button>
                     <span className={style.register}>
                         No account yet?{' '}
-                        <Link to="/register">Register here!</Link>
+                        <Link
+                            to="/register"
+                            style={{
+                                color: '#fff'
+                            }}
+                        >
+                            Register here!
+                        </Link>
                     </span>
                 </form>
             </CenterContainer>
-        </AnimatedDiv>
+        </motion.div>
     );
 };
 

@@ -2,10 +2,10 @@ import { Button, TextField } from '@mui/material';
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useRegisterMutation } from '../../state/auth/authApiSlice';
-import AnimatedDiv from '../utils/AnimatedDiv';
 import CenterContainer from '../utils/CenterContainer';
 import useDocumentTitle from '../utils/useDocumentTitle';
 import style from './css/Register.module.css';
+import { motion } from 'framer-motion';
 
 const Register = () => {
     useDocumentTitle('Task-Manager - Register');
@@ -68,12 +68,16 @@ const Register = () => {
     };
 
     return (
-        <AnimatedDiv>
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+        >
             <CenterContainer>
                 <form onSubmit={handleSubmit} className={style.form}>
                     <h1 className={style.title}>Register</h1>
                     <TextField
-                        variant="standard"
+                        variant="outlined"
                         type="text"
                         id="fullname"
                         name="fullname"
@@ -86,7 +90,7 @@ const Register = () => {
                     />
                     <br />
                     <TextField
-                        variant="standard"
+                        variant="outlined"
                         type="username"
                         id="username"
                         name="username"
@@ -98,7 +102,7 @@ const Register = () => {
                     />
                     <br />
                     <TextField
-                        variant="standard"
+                        variant="outlined"
                         type="password"
                         id="password"
                         name="password"
@@ -114,11 +118,18 @@ const Register = () => {
                     </Button>
                     <span className={style.login}>
                         Already have an account?{' '}
-                        <Link to="/login">Login here!</Link>
+                        <Link
+                            to="/login"
+                            style={{
+                                color: '#fff'
+                            }}
+                        >
+                            Login here!
+                        </Link>
                     </span>
                 </form>
             </CenterContainer>
-        </AnimatedDiv>
+        </motion.div>
     );
 };
 

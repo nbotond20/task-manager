@@ -78,7 +78,6 @@ Az alábbi kötelező adatokkal történik:
 - email (email. kötelező)
 - jelszó (kötelező)
 
-Validáció elegendő HTML5 attribútumokkal!
 
 ### Feladatsoraim (Tasklists)
 

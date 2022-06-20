@@ -65,9 +65,9 @@ const Row = ({
                                     onClick={() => setOpen(!open)}
                                 >
                                     {open ? (
-                                        <KeyboardArrowUpIcon />
+                                        <KeyboardArrowUpIcon color="secondary"/>
                                     ) : (
-                                        <KeyboardArrowDownIcon />
+                                        <KeyboardArrowDownIcon color="secondary"/>
                                     )}
                                 </IconButton>
                                 {children}
@@ -100,7 +100,7 @@ const Row = ({
                                 ) : (
                                     <Chip
                                         label="Draft"
-                                        color="primary"
+                                        color="info"
                                         variant="outlined"
                                     />
                                 )}

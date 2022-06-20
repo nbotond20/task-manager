@@ -9,12 +9,11 @@
 
 .showBorder {
     border: 1px solid #e0e0e0;
-    background-color: #e6e6e6be !important;
+    background-color: rgba(52, 62, 68, 0.452) !important;
 }
 
 .hideBorder {
     border: none;
-    background-color: #fff !important;
 }
 
 .title {

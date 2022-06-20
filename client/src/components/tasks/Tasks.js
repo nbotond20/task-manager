@@ -56,12 +56,15 @@ export default function Tasks({ itemPerPage = 10, loadingTime = 1500 }) {
                     sx={{
                         boxShadow: 'none',
                         margin: '0',
-                        fontWeight: 'bold'
+                        fontWeight: 'bold',
+                        color: 'text.primary',
                     }}
+                    disabled
                 >
                     <AccordionSummary
                         sx={{
-                            boxShadow: 'none'
+                            boxShadow: 'none',
+                            color: 'rgb(255,255,255)',
                         }}
                     >
                         <Typography sx={{ width: '33%', flexShrink: 0 }}>
@@ -95,7 +98,9 @@ export default function Tasks({ itemPerPage = 10, loadingTime = 1500 }) {
                                 }
                             >
                                 <AccordionSummary
-                                    expandIcon={<ExpandMoreIcon />}
+                                    expandIcon={
+                                        <ExpandMoreIcon color="secondary" />
+                                    }
                                     aria-controls={`panel${index}}bh-content`}
                                     id={`panel${index}}bh-header`}
                                     sx={{
@@ -189,10 +194,7 @@ export default function Tasks({ itemPerPage = 10, loadingTime = 1500 }) {
                         count={
                             data
                                 ? Math.ceil(
-                                      Math.max(
-                                          data.total / itemPerPage,
-                                          1
-                                      )
+                                      Math.max(data.total / itemPerPage, 1)
                                   )
                                 : 1
                         }

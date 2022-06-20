@@ -18,7 +18,7 @@ const Loading = ({ count }) => {
                     >
                         <TableCell>
                             <IconButton aria-label="expand row" size="small">
-                                <KeyboardArrowDownIcon />
+                                <KeyboardArrowDownIcon color="secondary"/>
                             </IconButton>
                         </TableCell>
                         <TableCell component="th" scope="row">
