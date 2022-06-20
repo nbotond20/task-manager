@@ -1,12 +1,15 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import toastError from "../actions/toastError";
-import toastSuccess from "../actions/toastSuccess";
-import { selectLoggedInUser } from "../state/auth/authSlice";
-import { addTask, selectEdit, setEditing } from "../state/edit/editSlice";
-import { useDeleteTaskMutation, useGetTasksRangeQuery } from "../state/tasks/tasksApiSlice";
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import toastError from '../actions/toastError';
+import toastSuccess from '../actions/toastSuccess';
+import { selectLoggedInUser } from '../state/auth/authSlice';
+import { addTask, selectEdit, setEditing } from '../state/edit/editSlice';
+import {
+    useDeleteTaskMutation,
+    useGetTasksRangeQuery
+} from '../state/tasks/tasksApiSlice';
 
-const useTasksService = ({itemPerPage}) => {
+const useTasksService = ({ itemPerPage }) => {
     const user = useSelector(selectLoggedInUser);
     const editing = useSelector(selectEdit);
 
@@ -54,34 +57,42 @@ const useTasksService = ({itemPerPage}) => {
     const handleDelete = async (e, id) => {
         e.stopPropagation();
         const result = await deleteTask(id);
-        if(!result?.error){
-            toastSuccess(
-                `Task deleted successfully!`, 
-                1000
-            );
-        }else{
-            toastError(
-                `Error deleting task!`,
-                1000
-            );
+        if (!result?.error) {
+            toastSuccess(`Task deleted successfully!`, 1000);
+        } else {
+            toastError(`Error deleting task!`, 1000);
         }
-    }
+    };
 
-    return{
+    const [search, setSearch] = React.useState('');
+    
+    const filterdData = React.useMemo(() => {
+        return data?.tasks?.filter((task) => {
+            return (
+                task.title.toLowerCase().includes(search.toLowerCase()) ||
+                task.description.toLowerCase().includes(search.toLowerCase())
+            );
+        });
+    }, [data, search]);
+
+    return {
         user,
         editing,
         data,
         page,
-        setPage,
         loading,
-        setLoading,
         isLoading,
+        expanded,
+        search,
+        filterdData,
+        handlePageChange,
+        setPage,
+        setLoading,
         handleSelect,
         handleExpand,
-        handlePageChange,
-        expanded,
-        handleDelete
-    }
-}
+        handleDelete,
+        setSearch
+    };
+};
 
 export default useTasksService;

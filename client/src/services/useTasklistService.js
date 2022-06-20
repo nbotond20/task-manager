@@ -4,7 +4,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import toastSuccess from '../actions/toastSuccess';
 import { selectLoggedInUser } from '../state/auth/authSlice';
-import { clear, selectEdit, setEditing } from '../state/edit/editSlice';
+import {
+    clear,
+    selectEdit,
+    selectUserId,
+    setEditing
+} from '../state/edit/editSlice';
 import {
     useDeleteTaskListMutation,
     useGetTaskListsQuery
@@ -33,7 +38,7 @@ const curData = (filterData, data, user, itemPerPage, page) => {
         : [];
 };
 
-const useTasklistService = ({itemPerPage}) => {
+const useTasklistService = ({ itemPerPage }) => {
     const user = useSelector(selectLoggedInUser);
 
     const { data, isLoading } = useGetTaskListsQuery();
@@ -70,7 +75,6 @@ const useTasklistService = ({itemPerPage}) => {
 
     const [loading, setLoading] = useState(true);
     const [page, setPage] = useState(1);
-
 
     useEffect(() => {
         setCurrentData(curData(filterData, data, user, itemPerPage, page));
@@ -113,10 +117,14 @@ const useTasklistService = ({itemPerPage}) => {
         }
     };
 
+    const userId = useSelector(selectUserId);
     const [deleteTaskList] = useDeleteTaskListMutation();
-    const handleDeleteFromRow = async (taskListID) => {
-        await deleteTaskList(taskListID);
+    const handleDeleteFromRow = async (taskListID, e) => {
+        setTimeout(async () => {
+            await deleteTaskList(taskListID);
+        }, 600);
         if (editing?.id === taskListID) {
+            localStorage.removeItem(`taskList-${userId}`);
             dispatch(clear());
         }
         toastSuccess('Successfully deleted the tasklist!', 1000);

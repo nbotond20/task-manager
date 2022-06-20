@@ -22,6 +22,7 @@ const Loading = ({ count }) => {
                     in={true}
                     {...(true ? { timeout: 250 * index } : {})}
                     key={index}
+                    
                 >
                     <Accordion
                         sx={{

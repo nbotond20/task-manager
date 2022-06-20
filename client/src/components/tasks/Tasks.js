@@ -11,6 +11,9 @@ import CardContainer from '../utils/CardContainer';
 import PaginationRounded from '../utils/PaginationRounded';
 import useDocumentTitle from '../utils/useDocumentTitle';
 import Loading from './Loading';
+import style from './css/Tasks.module.css';
+import AnimatedDiv from '../utils/AnimatedDiv';
+import SearchBar from './SreachBar';
 
 export default function Tasks({ itemPerPage = 10, loadingTime = 1500 }) {
     useDocumentTitle('Task-Manager - Tasks');
@@ -18,11 +21,14 @@ export default function Tasks({ itemPerPage = 10, loadingTime = 1500 }) {
     const {
         user,
         editing,
-        data,
         page,
         loading,
         isLoading,
         expanded,
+        search,
+        filterdData,
+        data,
+        setSearch,
         setLoading,
         handleSelect,
         handleExpand,
@@ -35,145 +41,166 @@ export default function Tasks({ itemPerPage = 10, loadingTime = 1500 }) {
     }, loadingTime);
 
     return (
-        <CardContainer>
-            <h1 style={{ textAlign: 'center', margin: '0.5 0' }}>
-                Tasks
-            </h1>
-            {data?.tasks?.length <= 0 && !loading && (
-                <Alert severity="warning">
-                    There are no tasks available - create one!
-                </Alert>
-            )}
-            <Accordion
-                sx={{
-                    boxShadow: 'none',
-                    margin: '0',
-                    fontWeight: 'bold'
-                }}
-            >
-                <AccordionSummary
+        <AnimatedDiv>
+            <CardContainer>
+                <h1 className={style.title}>
+                    <SearchBar search={search} setSearch={setSearch} />
+                    Tasks
+                </h1>
+                {filterdData?.length <= 0 && !loading && (
+                    <Alert severity="warning">
+                        There are no tasks available - create one!
+                    </Alert>
+                )}
+                <Accordion
                     sx={{
-                        boxShadow: 'none'
+                        boxShadow: 'none',
+                        margin: '0',
+                        fontWeight: 'bold'
                     }}
                 >
-                    <Typography sx={{ width: '33%', flexShrink: 0 }}>
-                        Title
-                    </Typography>
-                    <Typography sx={{ color: 'text.secondary' }}>
-                        Description
-                    </Typography>
-                </AccordionSummary>
-            </Accordion>
-            {!loading &&
-                data?.tasks?.map((task, index) => (
-                    <Grow
-                        direction="up"
-                        in={true}
-                        {...(true ? { timeout: 250 * (index + 1) } : {})}
-                        key={index}
+                    <AccordionSummary
+                        sx={{
+                            boxShadow: 'none'
+                        }}
                     >
-                        <Accordion
-                            expanded={expanded === `panel${index}}`}
-                            onChange={handleExpand(`panel${index}}`)}
-                            sx={{
-                                boxShadow: 'none',
-                                margin: '0',
-                                border: !(expanded === `panel${index}}`)
-                                    ? 'none'
-                                    : '1px solid #e0e0e0',
-                                backgroundColor: !(
-                                    expanded === `panel${index}}`
-                                )
-                                    ? '#fff'
-                                    : '#fafafa'
-                            }}
+                        <Typography sx={{ width: '33%', flexShrink: 0 }}>
+                            Title
+                        </Typography>
+                        <Typography sx={{ color: 'text.secondary' }}>
+                            Description
+                        </Typography>
+                    </AccordionSummary>
+                </Accordion>
+                {!loading &&
+                    filterdData?.map((task, index) => (
+                        <Grow
+                            direction="up"
+                            in={true}
+                            {...(true ? { timeout: 250 * (index + 1) } : {})}
+                            key={index}
                         >
-                            <AccordionSummary
-                                expandIcon={<ExpandMoreIcon />}
-                                aria-controls={`panel${index}}bh-content`}
-                                id={`panel${index}}bh-header`}
+                            <Accordion
+                                expanded={expanded === `panel${index}}`}
+                                onChange={handleExpand(`panel${index}}`)}
                                 sx={{
-                                    boxShadow: 'none'
+                                    boxShadow: 'none',
+                                    broder: '0px',
+                                    margin: '0 !important'
                                 }}
+                                className={
+                                    expanded === `panel${index}}`
+                                        ? style.showBorder
+                                        : style.hideBorder
+                                }
                             >
-                                <Typography
-                                    sx={{ width: '33%', flexShrink: 0 }}
+                                <AccordionSummary
+                                    expandIcon={<ExpandMoreIcon />}
+                                    aria-controls={`panel${index}}bh-content`}
+                                    id={`panel${index}}bh-header`}
+                                    sx={{
+                                        boxShadow: 'none',
+                                        border: '0px',
+                                        margin: '0'
+                                    }}
                                 >
-                                    {task.title}
-                                </Typography>
-                                <Typography sx={{ color: 'text.secondary' }}>
-                                    {!(expanded === `panel${index}}`)
-                                        ? `${task.description.slice(0, 25)}${
-                                              task.description.length > 25
-                                                  ? '...'
-                                                  : ''
-                                          }`
-                                        : ''}
-                                </Typography>
-                                <Box flexGrow={1} />
-                                {user && (
-                                    <>
-                                        <Button
-                                            sx={{ margin: 'auto', zIndex: '1' }}
-                                            variant="contained"
-                                            onClick={(e) => {
-                                                handleSelect(e, task);
-                                            }}
-                                            disabled={
-                                                editing?.tasks.find(
+                                    <Typography
+                                        sx={{ width: '33%', flexShrink: 0 }}
+                                    >
+                                        {task.title}
+                                    </Typography>
+                                    <Typography
+                                        sx={{ color: 'text.secondary' }}
+                                    >
+                                        <span
+                                            className={
+                                                expanded === `panel${index}}`
+                                                    ? style.hideDesc
+                                                    : style.showDesc
+                                            }
+                                        >
+                                            {task.description.slice(0, 25)}
+                                            {task.description.length > 25
+                                                ? '...'
+                                                : ''}
+                                        </span>
+                                    </Typography>
+                                    <Box flexGrow={1} />
+                                    {user && (
+                                        <>
+                                            <Button
+                                                sx={{
+                                                    margin: 'auto',
+                                                    zIndex: '1'
+                                                }}
+                                                variant="contained"
+                                                onClick={(e) => {
+                                                    handleSelect(e, task);
+                                                }}
+                                                disabled={
+                                                    editing?.tasks.find(
+                                                        (t) => t.id === task.id
+                                                    ) === undefined
+                                                        ? false
+                                                        : true
+                                                }
+                                            >
+                                                {editing?.tasks.find(
                                                     (t) => t.id === task.id
-                                                ) === undefined
-                                                    ? false
-                                                    : true
+                                                )
+                                                    ? 'Selected'
+                                                    : 'Select'}
+                                            </Button>
+                                            <Button
+                                                onClick={(e) =>
+                                                    handleDelete(e, task.id)
+                                                }
+                                            >
+                                                <DeleteIcon color="error" />
+                                            </Button>
+                                        </>
+                                    )}
+                                </AccordionSummary>
+                                <AccordionDetails>
+                                    <Typography
+                                        sx={{ color: 'text.secondary' }}
+                                    >
+                                        <span
+                                            className={
+                                                !(expanded === `panel${index}}`)
+                                                    ? style.hiddenDesc
+                                                    : style.showDesc
                                             }
                                         >
-                                            {editing?.tasks.find(
-                                                (t) => t.id === task.id
-                                            )
-                                                ? 'Selected'
-                                                : 'Select'}
-                                        </Button>
-                                        <Button
-                                            onClick={(e) =>
-                                                handleDelete(e, task.id)
-                                            }
-                                        >
-                                            <DeleteIcon color="error" />
-                                        </Button>
-                                    </>
-                                )}
-                            </AccordionSummary>
-                            <AccordionDetails>
-                                <Typography sx={{ color: 'text.secondary' }}>
-                                    {task.description}
-                                </Typography>
-                            </AccordionDetails>
-                        </Accordion>
-                    </Grow>
-                ))}
-            {loading && (
-                <>
-                    <Loading count={itemPerPage} />
-                </>
-            )}
-            <div
-                style={{
-                    display: 'flex',
-                    margin: 'auto',
-                    justifyContent: 'center',
-                    marginTop: '1em'
-                }}
-            >
-                <PaginationRounded
-                    count={
-                        data
-                            ? Math.ceil(Math.max(data.total / itemPerPage, 1))
-                            : 1
-                    }
-                    onChange={handlePageChange}
-                    page={page}
-                />
-            </div>
-        </CardContainer>
+                                            {task.description}
+                                        </span>
+                                    </Typography>
+                                </AccordionDetails>
+                            </Accordion>
+                        </Grow>
+                    ))}
+                {loading && (
+                    <>
+                        <Loading count={itemPerPage} />
+                    </>
+                )}
+                <div className={style.pagination}>
+                    <PaginationRounded
+                        count={
+                            data
+                                ? Math.ceil(
+                                      Math.max(
+                                          data.total / itemPerPage,
+                                          1
+                                      )
+                                  )
+                                : 1
+                        }
+                        onChange={handlePageChange}
+                        page={page}
+                    />
+                </div>
+            </CardContainer>
+        </AnimatedDiv>
     );
 }

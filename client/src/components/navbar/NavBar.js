@@ -45,7 +45,11 @@ const NavBar = () => {
                         editing={editing}
                     />
                     <TitleCenter />
-                    <Navigation user={user} handleCloseNavMenu={handleCloseNavMenu} editing={editing}/>
+                    <Navigation
+                        user={user}
+                        handleCloseNavMenu={handleCloseNavMenu}
+                        editing={editing}
+                    />
                     <ProfileIcon
                         user={user}
                         handleOpenUserMenu={handleOpenUserMenu}

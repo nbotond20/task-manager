@@ -52,6 +52,7 @@ Statikus információkat tartalmazó oldal, az alkalmazás címével és egy rö
 
 A háttérrendszerben felvett adatok böngészése lehetséges itt. Az oldal 10 feladatot jelenít meg egyszerre, a feladatlistában előre-hátra lehet lapozni. Egy feladatnál a feladat címe, és a leírás egy rövid szelete jelenik meg. A feladatra kattintva ugyanezen az oldalon megjelenik a feladat teljes leírása.
 
+- Keresés a feladatok között cím és leírás alapján
 - Ha a felhasználó be van jelentkezve,
   - és a feladat még nincs kiválasztva,
     - akkor megjelenik egy "Kiválaszt" gomb, amire kattintva

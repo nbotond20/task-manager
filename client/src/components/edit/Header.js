@@ -89,7 +89,7 @@ const Header = ({ control, watch, editing }) => {
                     )}
                 </span>
                 <span>
-                    Updated at:
+                    Updated:
                     {editing?.updatedAt && (
                         <span>
                             {' '}

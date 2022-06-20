@@ -19,6 +19,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import React from 'react';
 import { v4 } from 'uuid';
+import style from './css/TaskLists.module.css';
 
 const Row = ({
     row,
@@ -40,6 +41,8 @@ const Row = ({
         return 0;
     }
 
+    const [rowDeleteId, setRowDeleteId] = React.useState(null);
+
     return (
         <>
             {row && tasks && (
@@ -49,7 +52,12 @@ const Row = ({
                         in={true}
                         {...(true ? { timeout: 250 * (index + 1) } : {})}
                     >
-                        <TableRow sx={{ borderCollapse: 'collapse' }}>
+                        <TableRow
+                            sx={{ borderCollapse: 'collapse' }}
+                            className={
+                                rowDeleteId === row.id ? style.delete : ''
+                            }
+                        >
                             <TableCell>
                                 <IconButton
                                     aria-label="expand row"
@@ -111,7 +119,10 @@ const Row = ({
                                     <EditIcon />
                                 </Button>
                                 <Button
-                                    onClick={() => handleDeleteFromRow(row.id)}
+                                    onClick={(e) => {
+                                        handleDeleteFromRow(row.id, e);
+                                        setRowDeleteId(row.id);
+                                    }}
                                 >
                                     <DeleteIcon color="error" />
                                 </Button>

@@ -9,7 +9,7 @@ const Loading = ({ count }) => {
                 <Grow
                     direction="up"
                     in={true}
-                    {...(true ? { timeout: 250 * (index + 1) } : {})}
+                    {...(true ? { timeout: 250 * (index + 1)  } : {})}
                     key={index}
                 >
                     <TableRow

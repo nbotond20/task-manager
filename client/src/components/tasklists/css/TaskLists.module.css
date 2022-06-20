@@ -40,3 +40,30 @@
     justify-content: center;
     margin-top: 1em;
 }
+
+@keyframes removed-item-animation {
+    0% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    30% {
+        opacity: 1;
+        transform: translateX(50px);
+    }
+
+    80% {
+        opacity: 1;
+        transform: translateX(-100%);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateX(-100%);
+    }
+}
+
+.delete {
+    animation: removed-item-animation 0.8s cubic-bezier(0.65, -0.02, 0.72, 0.29);
+    color: red !important;
+}

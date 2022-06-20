@@ -2,6 +2,7 @@ import { Button, TextField } from '@mui/material';
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useRegisterMutation } from '../../state/auth/authApiSlice';
+import AnimatedDiv from '../utils/AnimatedDiv';
 import CenterContainer from '../utils/CenterContainer';
 import useDocumentTitle from '../utils/useDocumentTitle';
 import style from './css/Register.module.css';
@@ -67,55 +68,57 @@ const Register = () => {
     };
 
     return (
-        <CenterContainer>
-            <form onSubmit={handleSubmit} className={style.form}>
-                <h1 className={style.title}>Register</h1>
-                <TextField
-                    variant="standard"
-                    type="text"
-                    id="fullname"
-                    name="fullname"
-                    value={data.fullname}
-                    label="Full Name"
-                    autoFocus
-                    error={errors.fullname !== undefined}
-                    helperText={errors.fullname}
-                    onChange={handleChange}
-                />
-                <br />
-                <TextField
-                    variant="standard"
-                    type="username"
-                    id="username"
-                    name="username"
-                    value={data.username}
-                    label="Email"
-                    error={errors.username !== undefined}
-                    helperText={errors.username}
-                    onChange={handleChange}
-                />
-                <br />
-                <TextField
-                    variant="standard"
-                    type="password"
-                    id="password"
-                    name="password"
-                    value={data.password}
-                    label="Password"
-                    error={errors.password !== undefined}
-                    helperText={errors.password}
-                    onChange={handleChange}
-                />
-                <br />
-                <Button variant="contained" type="submit">
-                    Register
-                </Button>
-                <span className={style.login}>
-                    Already have an account?{' '}
-                    <Link to="/login">Login here!</Link>
-                </span>
-            </form>
-        </CenterContainer>
+        <AnimatedDiv>
+            <CenterContainer>
+                <form onSubmit={handleSubmit} className={style.form}>
+                    <h1 className={style.title}>Register</h1>
+                    <TextField
+                        variant="standard"
+                        type="text"
+                        id="fullname"
+                        name="fullname"
+                        value={data.fullname}
+                        label="Full Name"
+                        autoFocus
+                        error={errors.fullname !== undefined}
+                        helperText={errors.fullname}
+                        onChange={handleChange}
+                    />
+                    <br />
+                    <TextField
+                        variant="standard"
+                        type="username"
+                        id="username"
+                        name="username"
+                        value={data.username}
+                        label="Email"
+                        error={errors.username !== undefined}
+                        helperText={errors.username}
+                        onChange={handleChange}
+                    />
+                    <br />
+                    <TextField
+                        variant="standard"
+                        type="password"
+                        id="password"
+                        name="password"
+                        value={data.password}
+                        label="Password"
+                        error={errors.password !== undefined}
+                        helperText={errors.password}
+                        onChange={handleChange}
+                    />
+                    <br />
+                    <Button variant="contained" type="submit">
+                        Register
+                    </Button>
+                    <span className={style.login}>
+                        Already have an account?{' '}
+                        <Link to="/login">Login here!</Link>
+                    </span>
+                </form>
+            </CenterContainer>
+        </AnimatedDiv>
     );
 };
 

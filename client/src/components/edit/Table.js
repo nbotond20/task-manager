@@ -15,8 +15,14 @@ import { Link } from 'react-router-dom';
 import style from './css/Edit.module.css';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-const EditTable = ({ tasks, control, setIsClosing, onSubmit, handleDelete }) => {
-
+const EditTable = ({
+    tasks,
+    control,
+    setIsClosing,
+    onSubmit,
+    handleDelete,
+    handlePageChange
+}) => {
     return (
         <div className={style.tableContainer}>
             <TableContainer component={Paper}>
@@ -68,9 +74,12 @@ const EditTable = ({ tasks, control, setIsClosing, onSubmit, handleDelete }) => 
                                                 )}
                                             />
                                         </TableCell>
-                                        <TableCell align="center" style={{
-                                            padding: '0'
-                                        }}>
+                                        <TableCell
+                                            align="center"
+                                            style={{
+                                                padding: '0'
+                                            }}
+                                        >
                                             <Controller
                                                 name={`task-points[${task.id}]`}
                                                 control={control}
@@ -103,14 +112,16 @@ const EditTable = ({ tasks, control, setIsClosing, onSubmit, handleDelete }) => 
 
                                         <TableCell
                                             style={{
-                                                padding: '0 1em 0 0',
+                                                padding: '0 1em 0 0'
                                             }}
                                         >
                                             <DeleteIcon
                                                 color="error"
-                                                onClick={() => handleDelete(task.id)}
+                                                onClick={() =>
+                                                    handleDelete(task.id)
+                                                }
                                                 style={{
-                                                    cursor: 'pointer',
+                                                    cursor: 'pointer'
                                                 }}
                                             />
                                         </TableCell>
@@ -125,7 +136,7 @@ const EditTable = ({ tasks, control, setIsClosing, onSubmit, handleDelete }) => 
                             to="/tasks"
                             onClick={() => {
                                 setIsClosing(false);
-                                onSubmit();
+                                handlePageChange();
                             }}
                         >
                             add one

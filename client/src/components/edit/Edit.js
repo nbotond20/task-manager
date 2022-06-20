@@ -3,6 +3,7 @@ import useEditingService from '../../services/useEditingService';
 import Buttons from './Buttons';
 import EditTable from './Table';
 import Header from './Header';
+import AnimatedDiv from '../utils/AnimatedDiv';
 
 const Edit = () => {
     const {
@@ -16,10 +17,11 @@ const Edit = () => {
         watch,
         onError,
         handleDelete,
+        handlePageChange
     } = useEditingService();
 
     return (
-        <>
+        <AnimatedDiv>
             <CardContainer>
                 <form onSubmit={handleSubmit(onSubmit, onError)}>
                     <Header control={control} watch={watch} editing={editing} />
@@ -29,11 +31,12 @@ const Edit = () => {
                         setIsClosing={setIsClosing}
                         onSubmit={onSubmit}
                         handleDelete={handleDelete}
+                        handlePageChange={handlePageChange}
                     />
                     <Buttons setIsClosing={setIsClosing} cancel={cancel} />
                 </form>
             </CardContainer>
-        </>
+        </AnimatedDiv>
     );
 };
 
