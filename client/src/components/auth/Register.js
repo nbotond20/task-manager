@@ -5,7 +5,7 @@ import { useRegisterMutation } from '../../state/auth/authApiSlice';
 import CenterContainer from '../utils/CenterContainer';
 import useDocumentTitle from '../utils/useDocumentTitle';
 import style from './css/Register.module.css';
-import { motion } from 'framer-motion';
+import AnimatedDiv from '../utils/AnimatedDiv';
 
 const Register = () => {
     useDocumentTitle('Task-Manager - Register');
@@ -68,11 +68,7 @@ const Register = () => {
     };
 
     return (
-        <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-        >
+        <AnimatedDiv>
             <CenterContainer>
                 <form onSubmit={handleSubmit} className={style.form}>
                     <h1 className={style.title}>Register</h1>
@@ -129,7 +125,7 @@ const Register = () => {
                     </span>
                 </form>
             </CenterContainer>
-        </motion.div>
+        </AnimatedDiv>
     );
 };
 

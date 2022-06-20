@@ -36,6 +36,9 @@ const Loading = ({ count }) => {
                         <TableCell align="right">
                             <Skeleton variant="text" width={'100%'} />
                         </TableCell>
+                        <TableCell align="right">
+                            <Skeleton variant="text" width={'100%'} />
+                        </TableCell>
                     </TableRow>
                 </Grow>
             ))}

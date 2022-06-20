@@ -30,6 +30,7 @@ const Row = ({
     handleDeleteFromRow
 }) => {
     const [open, setOpen] = React.useState(false);
+    const [rowDeleteId, setRowDeleteId] = React.useState(null);
 
     function compare(a, b) {
         if (a.title < b.title) {
@@ -41,7 +42,6 @@ const Row = ({
         return 0;
     }
 
-    const [rowDeleteId, setRowDeleteId] = React.useState(null);
 
     return (
         <>
@@ -53,7 +53,10 @@ const Row = ({
                         {...(true ? { timeout: 250 * (index + 1) } : {})}
                     >
                         <TableRow
-                            sx={{ borderCollapse: 'collapse' }}
+                            sx={{
+                                borderCollapse: 'collapse',
+                                '& > *': { borderBottom: 'unset' }
+                            }}
                             className={
                                 rowDeleteId === row.id ? style.delete : ''
                             }
@@ -65,9 +68,9 @@ const Row = ({
                                     onClick={() => setOpen(!open)}
                                 >
                                     {open ? (
-                                        <KeyboardArrowUpIcon color="secondary"/>
+                                        <KeyboardArrowUpIcon color="secondary" />
                                     ) : (
-                                        <KeyboardArrowDownIcon color="secondary"/>
+                                        <KeyboardArrowDownIcon color="secondary" />
                                     )}
                                 </IconButton>
                                 {children}
@@ -114,7 +117,13 @@ const Row = ({
                             <TableCell align="right">
                                 <ReactTimeAgo date={new Date(row.updatedAt)} />
                             </TableCell>
-                            <TableCell align="center" sx={{ padding: '0' }}>
+                            <TableCell
+                                align="center"
+                                sx={{ padding: '0' }}
+                                style={{
+                                    border: 'none'
+                                }}
+                            >
                                 <Button onClick={() => handleOpenFromRow(row)}>
                                     <EditIcon />
                                 </Button>
@@ -131,7 +140,11 @@ const Row = ({
                     </Grow>
                     <TableRow>
                         <TableCell
-                            style={{ paddingBottom: 0, paddingTop: 0 }}
+                            style={{
+                                paddingBottom: 0,
+                                paddingTop: 0,
+                                '& > *': { borderBottom: 'unset' }
+                            }}
                             colSpan={7}
                         >
                             <Collapse in={open} timeout="auto" unmountOnExit>

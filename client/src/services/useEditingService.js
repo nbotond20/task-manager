@@ -127,7 +127,9 @@ const useEditingService = () => {
         navigate('/tasklists');
     };
 
+    
     const handleDelete = (id) => {
+        
         dispatch(
             setEditing({
                 taskList: {

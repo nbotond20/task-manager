@@ -1,6 +1,7 @@
 import CardContainer from '../utils/CardContainer';
 import useDocumentTitle from '../utils/useDocumentTitle';
 import AnimatedDiv from '../utils/AnimatedDiv';
+import style from './css/Home.module.css';
 
 const Home = () => {
     useDocumentTitle('Task-Manager - Home');
@@ -8,9 +9,7 @@ const Home = () => {
     return (
         <AnimatedDiv>
             <CardContainer>
-                <h1>
-                    Task-Manager
-                </h1>
+                
             </CardContainer>
         </AnimatedDiv>
     );

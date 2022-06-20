@@ -32,7 +32,7 @@ export const theme = createTheme({
             disabled: 'rgba(255,255,255,0.38)',
             hint: 'rgba(255,255,255,0.38)',
         },
-        divider: '#ffffff',
+        divider: 'rgba(255,255,255,0.5)',
     },
 });
 

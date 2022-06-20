@@ -14,6 +14,7 @@ import { Controller } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import style from './css/Edit.module.css';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { useState } from 'react';
 
 const EditTable = ({
     tasks,
@@ -23,23 +24,38 @@ const EditTable = ({
     handleDelete,
     handlePageChange
 }) => {
+    const [taskDeleteId, setTaskDeleteId] = useState(null);
+
     return (
         <div className={style.tableContainer}>
             <TableContainer component={Paper}>
                 {tasks?.length > 0 ? (
-                    <Table aria-label="simple table">
+                    <Table
+                        aria-label="simple table"
+                        style={{
+                            overflow: 'hidden'
+                        }}
+                    >
                         <TableHead>
                             <TableRow>
                                 <TableCell align="left">Title</TableCell>
                                 <TableCell align="left">Description</TableCell>
                                 <TableCell align="center">Notes</TableCell>
                                 <TableCell align="center">Points</TableCell>
+                                <TableCell align="center"></TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
                             {tasks &&
                                 tasks?.map((task) => (
-                                    <TableRow key={task.id}>
+                                    <TableRow
+                                        key={task.id}
+                                        className={
+                                            taskDeleteId === task.id
+                                                ? style.delete
+                                                : ''
+                                        }
+                                    >
                                         <TableCell align="left">
                                             {task.title}
                                         </TableCell>
@@ -117,9 +133,12 @@ const EditTable = ({
                                         >
                                             <DeleteIcon
                                                 color="error"
-                                                onClick={() =>
-                                                    handleDelete(task.id)
-                                                }
+                                                onClick={() => {
+                                                    setTimeout(() => {
+                                                        handleDelete(task.id);
+                                                    }, 600);
+                                                    setTaskDeleteId(task.id);
+                                                }}
                                                 style={{
                                                     cursor: 'pointer'
                                                 }}

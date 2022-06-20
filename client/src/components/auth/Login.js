@@ -10,7 +10,7 @@ import { setUserId } from '../../state/edit/editSlice';
 import loginAction from '../../actions/login';
 import loadTasklist from '../../actions/loadTasklist';
 import { selectLoggedInUser } from '../../state/auth/authSlice';
-import { motion } from 'framer-motion';
+import AnimatedDiv from '../utils/AnimatedDiv';
 
 const Login = () => {
     const user = useSelector(selectLoggedInUser);
@@ -83,11 +83,7 @@ const Login = () => {
     }
 
     return (
-        <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-        >
+        <AnimatedDiv>
             <CenterContainer className={style.container}>
                 <form onSubmit={handleSubmit} className={style.form}>
                     <h1 className={style.title}>Login</h1>
@@ -133,7 +129,7 @@ const Login = () => {
                     </span>
                 </form>
             </CenterContainer>
-        </motion.div>
+        </AnimatedDiv>
     );
 };
 

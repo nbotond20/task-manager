@@ -57,14 +57,14 @@ export default function Tasks({ itemPerPage = 10, loadingTime = 1500 }) {
                         boxShadow: 'none',
                         margin: '0',
                         fontWeight: 'bold',
-                        color: 'text.primary',
+                        color: 'text.primary'
                     }}
                     disabled
                 >
                     <AccordionSummary
                         sx={{
                             boxShadow: 'none',
-                            color: 'rgb(255,255,255)',
+                            color: 'rgb(255,255,255)'
                         }}
                     >
                         <Typography sx={{ width: '33%', flexShrink: 0 }}>
@@ -149,6 +149,13 @@ export default function Tasks({ itemPerPage = 10, loadingTime = 1500 }) {
                                                         ? false
                                                         : true
                                                 }
+                                                style={{
+                                                    color: editing?.tasks.find(
+                                                        (t) => t.id === task.id
+                                                    )
+                                                        ? 'gray'
+                                                        : 'white'
+                                                }}
                                             >
                                                 {editing?.tasks.find(
                                                     (t) => t.id === task.id

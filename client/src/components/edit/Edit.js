@@ -4,6 +4,7 @@ import Buttons from './Buttons';
 import EditTable from './Table';
 import Header from './Header';
 import AnimatedDiv from '../utils/AnimatedDiv';
+import useDocumentTitle from '../utils/useDocumentTitle';
 
 const Edit = () => {
     const {
@@ -19,6 +20,8 @@ const Edit = () => {
         handleDelete,
         handlePageChange
     } = useEditingService();
+
+    useDocumentTitle(`Task-Manager - Edit`);
 
     return (
         <AnimatedDiv>
