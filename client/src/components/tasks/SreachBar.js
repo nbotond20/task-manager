@@ -36,7 +36,7 @@ export default function SearchBar({ search, setSearch }) {
                                     aria-label="cancel"
                                     onClick={() => setSearch('')}
                                 >
-                                    <CloseIcon />
+                                    <CloseIcon color="secondary"/>
                                 </IconButton>
                             )}
                         </InputAdornment>

@@ -1,5 +1,9 @@
 # Feladatsorok alkalmazás
 
+## Demo
+
+A weboldal elérhető a _https://nbotond.netlify.app/_ címen.
+
 ## Telepítés
 
 ### A kliens
