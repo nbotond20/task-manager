@@ -4,13 +4,12 @@ const AnimatedDiv = ({ children }) => {
     const initial = { opacity: 0 };
 
     const animate = {
-        scale: [0.9, 1, 0.95, 1],
-        skew: [0.5, -0.5, 0.5, -0.5, 0],
-        rotate: [0, 0, 0, 0, 0],
-        opacity: [1, 1, 1, 1, 1],
+        /* scale: [0.9, 1, 0.95, 1],
+        skew: [0.5, -0.5, 0.5, -0.5, 0], */
+        opacity: 1,
         transition: {
             ease: 'easeInOut',
-            delay: 0.3,
+            delay: 0.3
         }
     };
 

@@ -1,6 +1,6 @@
 import { Paper, TableContainer } from '@mui/material';
 
-const CardContainer = ({ children }) => {
+const CardContainer = ({ children, style = {} }) => {
     return (
         <TableContainer
             component={Paper}
@@ -13,9 +13,12 @@ const CardContainer = ({ children }) => {
                 borderRadius: '10px',
                 boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.5)',
                 position: 'relative',
-                padding: '1em'
+                padding: '1em',
+                ...style
             }}
-        >{children}</TableContainer>
+        >
+            {children}
+        </TableContainer>
     );
 };
 

@@ -6,6 +6,16 @@
     margin-bottom: 2rem;
 }
 
+.title{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin: 0.5em 0;
+    position: relative;
+    font-size: 3em;
+    align-items: center;
+}
+
 .titleContainer {
     display: flex;
     flex-direction: column;

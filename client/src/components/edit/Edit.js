@@ -5,6 +5,7 @@ import EditTable from './Table';
 import Header from './Header';
 import AnimatedDiv from '../utils/AnimatedDiv';
 import useDocumentTitle from '../utils/useDocumentTitle';
+import style from './css/Edit.module.css';
 
 const Edit = () => {
     const {
@@ -26,6 +27,7 @@ const Edit = () => {
     return (
         <AnimatedDiv>
             <CardContainer>
+                <h1 className={style.title}>Edit</h1>
                 <form onSubmit={handleSubmit(onSubmit, onError)}>
                     <Header control={control} watch={watch} editing={editing} />
                     <EditTable
