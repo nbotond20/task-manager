@@ -27,8 +27,8 @@ export const theme = createTheme({
             paper: '#232A2E',
         },
         text: {
-            primary: 'rgba(255,255,255,0.84)',
-            secondary: 'rgba(255,255,255,0.54)',
+            primary: 'rgba(255,255,255,0.85)',
+            secondary: 'rgba(255,255,255,0.55)',
             disabled: 'rgba(255,255,255,0.38)',
             hint: 'rgba(255,255,255,0.38)',
         },
