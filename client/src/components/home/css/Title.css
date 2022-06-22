@@ -7,6 +7,7 @@
     60% {
         stroke-dashoffset: 0;
         fill: rgb(68,165,116);
+        transform: translateY(100px);
     }
     100% {
         stroke-dashoffset: 0;

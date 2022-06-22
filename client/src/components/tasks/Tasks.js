@@ -9,11 +9,11 @@ import * as React from 'react';
 import useTasksService from '../../services/useTasksService';
 import CardContainer from '../utils/CardContainer';
 import PaginationRounded from '../utils/PaginationRounded';
-import useDocumentTitle from '../utils/useDocumentTitle';
 import Loading from './Loading';
 import style from './css/Tasks.module.css';
 import AnimatedDiv from '../utils/AnimatedDiv';
 import SearchBar from './SreachBar';
+import useDocumentTitle from '../../services/useDocumentTitle';
 
 export default function Tasks({ itemPerPage = 10, loadingTime = 1500 }) {
     useDocumentTitle('Task-Manager - Tasks');

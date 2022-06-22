@@ -3,9 +3,9 @@ import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useRegisterMutation } from '../../state/auth/authApiSlice';
 import CenterContainer from '../utils/CenterContainer';
-import useDocumentTitle from '../utils/useDocumentTitle';
 import style from './css/Register.module.css';
 import AnimatedDiv from '../utils/AnimatedDiv';
+import useDocumentTitle from '../../services/useDocumentTitle';
 
 const Register = () => {
     useDocumentTitle('Task-Manager - Register');

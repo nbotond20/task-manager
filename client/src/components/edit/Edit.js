@@ -4,8 +4,8 @@ import Buttons from './Buttons';
 import EditTable from './Table';
 import Header from './Header';
 import AnimatedDiv from '../utils/AnimatedDiv';
-import useDocumentTitle from '../utils/useDocumentTitle';
 import style from './css/Edit.module.css';
+import useDocumentTitle from '../../services/useDocumentTitle';
 
 const Edit = () => {
     const {

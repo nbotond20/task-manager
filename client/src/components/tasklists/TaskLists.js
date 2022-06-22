@@ -5,7 +5,6 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import useDocumentTitle from '../utils/useDocumentTitle';
 import CardContainer from '../utils/CardContainer';
 import Row from './Row';
 import Loading from './Loading';
@@ -13,6 +12,7 @@ import useTasklistService from '../../services/useTasklistService';
 import Pagination from './Pagination';
 import Header from './Header';
 import AnimatedDiv from '../utils/AnimatedDiv';
+import useDocumentTitle from '../../services/useDocumentTitle';
 
 const TaskLists = ({ itemPerPage = 10, loadingTime = 1500 }) => {
     useDocumentTitle('Task-Manager - Tasklists');

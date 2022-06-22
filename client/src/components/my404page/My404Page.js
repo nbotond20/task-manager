@@ -1,11 +1,14 @@
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import useDocumentTitle from "../../services/useDocumentTitle";
 import CardContainer from "../utils/CardContainer";
 import CenterContainer from "../utils/CenterContainer";
 import style from "./css/My404Page.module.css";
 
 const My404Page = () => {
     const naigate = useNavigate();
+
+    useDocumentTitle("Task-Manager - 404");
 
     return (
         <CardContainer>

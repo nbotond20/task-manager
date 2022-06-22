@@ -1,5 +1,4 @@
 import CardContainer from '../utils/CardContainer';
-import useDocumentTitle from '../utils/useDocumentTitle';
 import style from './css/Home.module.css';
 import { Button, IconButton, Tooltip, Typography } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
@@ -11,6 +10,7 @@ import { selectLoggedInUser } from '../../state/auth/authSlice';
 import { useNavigate } from 'react-router-dom';
 import { setEditing } from '../../state/edit/editSlice';
 import Title from './Title';
+import useDocumentTitle from '../../services/useDocumentTitle';
 
 const Home = () => {
     const user = useSelector(selectLoggedInUser);

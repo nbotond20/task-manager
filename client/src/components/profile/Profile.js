@@ -4,10 +4,10 @@ import { useNavigate } from 'react-router-dom';
 import { selectLoggedInUser } from '../../state/auth/authSlice';
 import CenterContainer from '../utils/CenterContainer';
 import style from './css/Profile.module.css';
-import useDocumentTitle from '../utils/useDocumentTitle';
 import { useGetTaskListsQuery } from '../../state/takskslists/tasksListsApiSlice';
 import logoutAction from '../../actions/logout';
 import AnimatedDiv from '../utils/AnimatedDiv';
+import useDocumentTitle from '../../services/useDocumentTitle';
 
 const Profile = () => {
     const dispatch = useDispatch();

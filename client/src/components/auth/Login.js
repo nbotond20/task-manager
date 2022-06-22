@@ -5,12 +5,12 @@ import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { useLoginMutation } from '../../state/auth/authApiSlice';
 import style from './css/Login.module.css';
 import CenterContainer from '../utils/CenterContainer';
-import useDocumentTitle from '../utils/useDocumentTitle';
 import { setUserId } from '../../state/edit/editSlice';
 import loginAction from '../../actions/login';
 import loadTasklist from '../../actions/loadTasklist';
 import { selectLoggedInUser } from '../../state/auth/authSlice';
 import AnimatedDiv from '../utils/AnimatedDiv';
+import useDocumentTitle from '../../services/useDocumentTitle';
 
 const Login = () => {
     const user = useSelector(selectLoggedInUser);
