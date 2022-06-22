@@ -17,6 +17,7 @@ import FilterListIcon from '@mui/icons-material/FilterList';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import style from './css/TaskLists.module.css';
+import FilterListOffIcon from '@mui/icons-material/FilterListOff';
 
 const Filter = ({
     filterData,
@@ -37,19 +38,31 @@ const Filter = ({
             <Button
                 variant={`${filterData ? 'contained' : 'outlined'}`}
                 color="primary"
-                sx={{
+                style={{
                     position: 'absolute',
-                    left: '0'
+                    left: '0',
+                    lineHeight: 'default !important'
                 }}
                 onClick={(e) => handleFilterClick(e)}
             >
-                <FilterListIcon />
-                Filter
-                {filterOpen ? (
-                    <KeyboardArrowDownIcon />
-                ) : (
-                    <KeyboardArrowRightIcon />
-                )}
+                <div
+                    style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        width: '100%',
+                        height: '100%',
+                        gap: '0.3rem'
+                    }}
+                >
+                    {filterData ? <FilterListIcon /> : <FilterListOffIcon />}
+                    Filter
+                    {filterOpen ? (
+                        <KeyboardArrowDownIcon />
+                    ) : (
+                        <KeyboardArrowRightIcon />
+                    )}
+                </div>
             </Button>
             <Dialog
                 open={filterOpen}

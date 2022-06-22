@@ -135,21 +135,21 @@ const Home = () => {
                             </>
                         )}
                         <Tooltip title="Check out our github page.">
-                            <IconButton>
-                                <div className={style.card}>
-                                    <a
-                                        href="https://github.com/nbotond20/task-manager"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        style={{
-                                            color: 'inherit',
-                                            textDecoration: 'none'
-                                        }}
-                                    >
+                            <a
+                                href="https://github.com/nbotond20/task-manager"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                style={{
+                                    color: 'inherit',
+                                    textDecoration: 'none'
+                                }}
+                            >
+                                <IconButton>
+                                    <div className={style.card}>
                                         <GitHubIcon sx={{ fontSize: 60 }} />
-                                    </a>
-                                </div>
-                            </IconButton>
+                                    </div>
+                                </IconButton>
+                            </a>
                         </Tooltip>
                     </motion.div>
                 </div>

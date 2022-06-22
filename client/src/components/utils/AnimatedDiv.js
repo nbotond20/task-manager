@@ -1,12 +1,13 @@
 import { motion } from 'framer-motion';
 
 const AnimatedDiv = ({ children }) => {
-    const initial = { opacity: 0 };
+    const initial = { opacity: 0, scale: 0.9 };
 
     const animate = {
         /* scale: [0.9, 1, 0.95, 1],
         skew: [0.5, -0.5, 0.5, -0.5, 0], */
         opacity: 1,
+        scale: 1,
         transition: {
             ease: 'easeInOut',
             delay: 0.3
@@ -15,6 +16,7 @@ const AnimatedDiv = ({ children }) => {
 
     const exit = {
         opacity: 0,
+        scale: 1.1,
         transition: {
             duration: 0.2
         }

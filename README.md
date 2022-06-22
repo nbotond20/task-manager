@@ -26,6 +26,10 @@ npm install
 npm start
 ```
 
+### Indítás
+
+Ha már telepítve van a szerver és a kliens is akkor a _`start.bat`_ fájlal lehet kényelmesen elindítani az alkalmazást.
+
 ## Leírás
 
 Ez egy olyan webes alkalmazás, amelyben egy tanárnak lehetősége van egy feladatsort összeállítani, pl. óra vagy dolgozat céljából. A tanár létrehoz egy új feladatsort, majd a feladatbankban a feladatok között böngészve egy-egy feladatot hozzáad a szerkesztésre jelölt feladatsorhoz. A feladatok és a feladatsorok listázhatók, részleteik megtekinthetők, a feladatsorok szerkeszthetők.
@@ -181,3 +185,4 @@ Az authentikációhoz tartozó JWT token a `tasklists` gyűjtemény `Authorizati
 ## Adatbázis
 
 A mentett adatok egy lokális SQLite táblában jelennek meg: `feladatsor_restapi.sqlite`. Ezt pl. a [DB Browser for SQLite](https://sqlitebrowser.org/) programmal tudunk megnézni, módosítani.
+
