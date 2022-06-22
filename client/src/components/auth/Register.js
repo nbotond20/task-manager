@@ -48,6 +48,7 @@ const Register = () => {
                 fullname: fullname
             }).unwrap();
             navigate('/login', { replace: true });
+            toastSuccess('Successful registration!', 1000);
         } catch (err) {
             newErrors.username = 'Register error';
             setErrors({ ...newErrors });
