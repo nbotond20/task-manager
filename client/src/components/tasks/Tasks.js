@@ -1,4 +1,4 @@
-import DeleteIcon from '@mui/icons-material/Delete';
+/* import DeleteIcon from '@mui/icons-material/Delete'; */
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Alert, Box, Button, Grow } from '@mui/material';
 import Accordion from '@mui/material/Accordion';
@@ -33,7 +33,7 @@ export default function Tasks({ itemPerPage = 10, loadingTime = 1500 }) {
         handleSelect,
         handleExpand,
         handlePageChange,
-        handleDelete
+       /*  handleDelete */
     } = useTasksService({ itemPerPage });
 
     setTimeout(() => {
@@ -163,13 +163,13 @@ export default function Tasks({ itemPerPage = 10, loadingTime = 1500 }) {
                                                     ? 'Selected'
                                                     : 'Select'}
                                             </Button>
-                                            <Button
+                                            {/* <Button
                                                 onClick={(e) =>
                                                     handleDelete(e, task.id)
                                                 }
                                             >
                                                 <DeleteIcon color="error" />
-                                            </Button>
+                                            </Button> */}
                                         </>
                                     )}
                                 </AccordionSummary>

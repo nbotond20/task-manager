@@ -107,6 +107,7 @@ const Register = () => {
                         error={errors.password !== undefined}
                         helperText={errors.password}
                         onChange={handleChange}
+                        color="secondary"
                     />
                     <br />
                     <Button variant="contained" type="submit">
