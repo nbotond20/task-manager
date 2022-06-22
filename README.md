@@ -6,6 +6,8 @@ A weboldal elérhető a _https://nbotond.netlify.app/_ címen.
 
 ## Telepítés
 
+Kényelmes telepítéshez az _`init.bat`_ filet kell futtatni (el is indítja az alkalmazást) VAGY: 
+
 ### A kliens
 
 A kliens forráskódja a `client` mappában található. Telepíteni és indítani kell lokálisan:
@@ -13,7 +15,6 @@ A kliens forráskódja a `client` mappában található. Telepíteni és indíta
 ```
 cd client
 npm install
-npm start
 ```
 
 ### A szerver
@@ -23,12 +24,29 @@ A szerver forráskódja a `rest-api` mappában található. Telepíteni és ind�
 ```
 cd rest-api
 npm install
+```
+
+## Indítás
+
+Ha már telepítve van a szerver és a kliens is akkor a _`start.bat`_ fájlal lehet kényelmesen elindítani az alkalmazást.
+
+### A kliens
+
+A kliens forráskódja a `client` mappában található. Telepíteni és indítani kell lokálisan:
+
+```
+cd client
 npm start
 ```
 
-### Indítás
+### A szerver
 
-Ha már telepítve van a szerver és a kliens is akkor a _`start.bat`_ fájlal lehet kényelmesen elindítani az alkalmazást.
+A szerver forráskódja a `rest-api` mappában található. Telepíteni és indítani kell lokálisan:
+
+```
+cd rest-api
+npm start
+```
 
 ## Leírás
 
@@ -148,25 +166,7 @@ A bejelentkezett felhasználó adatai jelennek meg.
 - Feladatsorok száma
 - Kijelentkezés gomb
 
-## A kliens
-
-A kliens forráskódja a `client` mappában található. Telepíteni és indítani kell lokálisan:
-
-```
-cd client
-npm install
-npm start
-```
-
-## A szerver
-
-A szerver forráskódja a `rest-api` mappában található. Telepíteni és indítani kell lokálisan:
-
-```
-cd rest-api
-npm install
-npm start
-```
+### Szerver
 
 Három szolgáltatás van kivezetve:
 
