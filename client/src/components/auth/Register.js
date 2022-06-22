@@ -6,6 +6,7 @@ import CenterContainer from '../utils/CenterContainer';
 import style from './css/Register.module.css';
 import AnimatedDiv from '../utils/AnimatedDiv';
 import useDocumentTitle from '../../services/useDocumentTitle';
+import toastSuccess from '../../actions/toastSuccess';
 
 const Register = () => {
     useDocumentTitle('Task-Manager - Register');
