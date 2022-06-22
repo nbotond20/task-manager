@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectLoggedInUser } from '../../state/auth/authSlice';
 import { useNavigate } from 'react-router-dom';
 import { setEditing } from '../../state/edit/editSlice';
+import Title from './Title';
 
 const Home = () => {
     const user = useSelector(selectLoggedInUser);
@@ -69,7 +70,7 @@ const Home = () => {
                             fontWeight: 'bold'
                         }}
                     >
-                        Manage your tasks.
+                        <Title/>
                     </Typography>
                     <Typography variant="h6" color="secondary">
                         Easy to use. Easy to manage.
