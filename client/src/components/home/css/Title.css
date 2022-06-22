@@ -6,12 +6,15 @@
     }
     60% {
         stroke-dashoffset: 0;
-        fill: rgb(68,165,116);
-        transform: translateY(100px);
+        fill: rgb(68, 165, 116);
+    }
+    80% {
+        stroke-dashoffset: 0;
+        fill: #dedfe0;
     }
     100% {
         stroke-dashoffset: 0;
-        fill: #dedfe0;
+        fill: transparent;
     }
 }
 /* Most browsers */
@@ -22,10 +25,14 @@
     }
     60% {
         stroke-dashoffset: 0;
-        fill: rgb(68,165,116);
+        fill: rgb(68, 165, 116);
+    }
+    80% {
+        stroke-dashoffset: 0;
+        fill: #dedfe0;
     }
     100% {
         stroke-dashoffset: 0;
-        fill: #dedfe0;
+        fill: transparent;
     }
 }
