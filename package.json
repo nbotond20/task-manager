@@ -1,5 +1,8 @@
 {
-    "dependencies": {},
+    "name": "task-manager",
+    "dependencies": {
+        "prettier": "^2.7.1"
+    },
     "scripts": {
         "pretty": "prettier --write \"**/*.{css,js,json}\""
     }
