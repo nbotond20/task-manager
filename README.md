@@ -28,7 +28,7 @@ npm install
 
 ## Indítás
 
-Ha már telepítve van a szerver és a kliens is akkor a _`start.bat`_ fájlal lehet kényelmesen elindítani az alkalmazást.
+Ha már telepítve van a szerver és a kliens is akkor a _scripts_ mappában lévő _`start.bat`_ fájlal lehet kényelmesen elindítani az alkalmazást Vagy az _`init.bat`_ fájlal. VAGY:
 
 ### A kliens
 
@@ -184,5 +184,10 @@ Az authentikációhoz tartozó JWT token a `tasklists` gyűjtemény `Authorizati
 
 ## Adatbázis
 
-A mentett adatok egy lokális SQLite táblában jelennek meg: `feladatsor_restapi.sqlite`. Ezt pl. a [DB Browser for SQLite](https://sqlitebrowser.org/) programmal tudunk megnézni, módosítani.
+A mentett adatok egy lokális SQLite táblában jelennek meg: `feladatsor_restapi.sqlite`. Ezt pl. a [DB Browser for SQLite](https://sqlitebrowser.org/) programmal tudjuk megnézni, módosítani.
 
+## Fejlesztési lehetőségek
+
+- [ ] Reszponzivitás
+- [ ] Lehetőség új feladatok létrehozására
+- [ ] _`init`_ és _`start`_ fájlok létrehozása linux rendszerhez (.sh fájlok)
