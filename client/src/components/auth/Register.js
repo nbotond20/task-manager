@@ -1,4 +1,4 @@
-import { Button, TextField } from '@mui/material';
+import { Button, IconButton, InputAdornment, TextField } from '@mui/material';
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useRegisterMutation } from '../../state/auth/authApiSlice';
@@ -7,6 +7,8 @@ import style from './css/Register.module.css';
 import AnimatedDiv from '../utils/AnimatedDiv';
 import useDocumentTitle from '../../services/useDocumentTitle';
 import toastSuccess from '../../actions/toastSuccess';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 const Register = () => {
     useDocumentTitle('Task-Manager - Register');
@@ -69,6 +71,15 @@ const Register = () => {
         });
     };
 
+    const [showPassword, setShowPassword] = useState(false);
+    const handleClickShowPassword = () => {
+        setShowPassword((showPassword) => !showPassword);
+    };
+
+    const handleMouseDownPassword = (event) => {
+        event.preventDefault();
+    };
+
     return (
         <AnimatedDiv>
             <CenterContainer>
@@ -101,7 +112,7 @@ const Register = () => {
                     <br />
                     <TextField
                         variant="outlined"
-                        type="password"
+                        type={showPassword ? 'text' : 'password'}
                         id="password"
                         name="password"
                         value={data.password}
@@ -110,6 +121,25 @@ const Register = () => {
                         helperText={errors.password}
                         onChange={handleChange}
                         color="secondary"
+                        InputProps={{
+                            endAdornment: (
+                                <InputAdornment position="end" >
+                                    <IconButton
+                                        aria-label="toggle password visibility"
+                                        onClick={handleClickShowPassword}
+                                        onMouseDown={handleMouseDownPassword}
+                                        edge="end"
+                                        color="secondary"
+                                    >
+                                        {showPassword ? (
+                                            <VisibilityOff />
+                                        ) : (
+                                            <Visibility />
+                                        )}
+                                    </IconButton>
+                                </InputAdornment>
+                            )
+                        }}
                     />
                     <br />
                     <Button variant="contained" type="submit">
