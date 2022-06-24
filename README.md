@@ -191,3 +191,4 @@ A mentett adatok egy lokális SQLite táblában jelennek meg: `feladatsor_restap
 - [ ] Reszponzivitás
 - [ ] Lehetőség új feladatok létrehozására
 - [ ] _`init`_ és _`start`_ fájlok létrehozása linux rendszerhez (.sh fájlok)
+- [ ] Áttérés typescript-re

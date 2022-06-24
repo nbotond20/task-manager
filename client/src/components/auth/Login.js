@@ -1,4 +1,4 @@
-import { Button, TextField } from '@mui/material';
+import { Button, IconButton, TextField } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
@@ -11,6 +11,8 @@ import loadTasklist from '../../actions/loadTasklist';
 import { selectLoggedInUser } from '../../state/auth/authSlice';
 import AnimatedDiv from '../utils/AnimatedDiv';
 import useDocumentTitle from '../../services/useDocumentTitle';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 const Login = () => {
     const user = useSelector(selectLoggedInUser);
@@ -78,6 +80,15 @@ const Login = () => {
         }
     }, [navigate]);
 
+    const [showPassword, setShowPassword] = useState(false);
+    const handleClickShowPassword = () => {
+        setShowPassword((showPassword) => !showPassword);
+    };
+
+    const handleMouseDownPassword = (event) => {
+        event.preventDefault();
+    };
+
     if (user) {
         return <Navigate to="/" />;
     }
@@ -100,18 +111,40 @@ const Login = () => {
                         onChange={handleChange}
                     />
                     <br />
-                    <TextField
-                        variant="outlined"
-                        type="password"
-                        id="password"
-                        name="password"
-                        value={data.password}
-                        label="Password"
-                        error={errors.password !== undefined}
-                        helperText={errors.password}
-                        onChange={handleChange}
-                        color="secondary"
-                    />
+                    <div
+                        style={{
+                            position: 'relative',
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center'
+                        }}
+                    >
+                        <TextField
+                            variant="outlined"
+                            type={showPassword ? 'text' : 'password'}
+                            id="password"
+                            name="password"
+                            value={data.password}
+                            label="Password"
+                            error={errors.password !== undefined}
+                            helperText={errors.password}
+                            onChange={handleChange}
+                            color="secondary"
+                        />
+                        <IconButton
+                            aria-label="toggle password visibility"
+                            onClick={handleClickShowPassword}
+                            onMouseDown={handleMouseDownPassword}
+                            edge="end"
+                            color="secondary"
+                            style={{
+                                position: 'absolute',
+                                right: '16.5px'
+                            }}
+                        >
+                            {showPassword ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
+                    </div>
                     <br />
                     <Button variant="contained" type="submit">
                         Login

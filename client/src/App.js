@@ -12,6 +12,7 @@ import loadTasklist from './actions/loadTasklist';
 import AnimatedRoutes from './AnimatedRoutes';
 import { createTheme } from '@mui/material';
 import { ThemeProvider } from '@emotion/react';
+import './css/TextField.css';
 
 export const theme = createTheme({
     palette: {

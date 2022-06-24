@@ -1,4 +1,4 @@
-import { Button, IconButton, InputAdornment, TextField } from '@mui/material';
+import { Button, IconButton, TextField } from '@mui/material';
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useRegisterMutation } from '../../state/auth/authApiSlice';
@@ -110,37 +110,38 @@ const Register = () => {
                         onChange={handleChange}
                     />
                     <br />
-                    <TextField
-                        variant="outlined"
-                        type={showPassword ? 'text' : 'password'}
-                        id="password"
-                        name="password"
-                        value={data.password}
-                        label="Password"
-                        error={errors.password !== undefined}
-                        helperText={errors.password}
-                        onChange={handleChange}
-                        color="secondary"
-                        InputProps={{
-                            endAdornment: (
-                                <InputAdornment position="end" >
-                                    <IconButton
-                                        aria-label="toggle password visibility"
-                                        onClick={handleClickShowPassword}
-                                        onMouseDown={handleMouseDownPassword}
-                                        edge="end"
-                                        color="secondary"
-                                    >
-                                        {showPassword ? (
-                                            <VisibilityOff />
-                                        ) : (
-                                            <Visibility />
-                                        )}
-                                    </IconButton>
-                                </InputAdornment>
-                            )
-                        }}
-                    />
+                    <div style={{
+                        position: 'relative',
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center'
+                    }}>
+                        <TextField
+                            variant="outlined"
+                            type={showPassword ? 'text' : 'password'}
+                            id="password"
+                            name="password"
+                            value={data.password}
+                            label="Password"
+                            error={errors.password !== undefined}
+                            helperText={errors.password}
+                            onChange={handleChange}
+                            color="secondary"
+                        />
+                        <IconButton
+                            aria-label="toggle password visibility"
+                            onClick={handleClickShowPassword}
+                            onMouseDown={handleMouseDownPassword}
+                            edge="end"
+                            color="secondary"
+                            style={{
+                                position: 'absolute',
+                                right: '16.5px',
+                            }}
+                        >
+                            {showPassword ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
+                    </div>
                     <br />
                     <Button variant="contained" type="submit">
                         Register
