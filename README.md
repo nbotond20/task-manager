@@ -189,6 +189,14 @@ Az authentikációhoz tartozó JWT token a `tasklists` gyűjtemény `Authorizati
 
 A mentett adatok egy lokális SQLite táblában jelennek meg: `feladatsor_restapi.sqlite`. Ezt pl. a [DB Browser for SQLite](https://sqlitebrowser.org/) programmal tudjuk megnézni, módosítani.
 
+## Egyébb parancsok
+
+Az összes file formázása:
+```
+npm i
+npm run pretty
+```
+
 ## Fejlesztési lehetőségek
 
 - [ ] Reszponzivitás
