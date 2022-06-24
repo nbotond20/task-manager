@@ -1,3 +1,4 @@
+call npm i
 cd client
 call npm i
 cd ..
