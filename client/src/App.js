@@ -18,23 +18,23 @@ export const theme = createTheme({
     palette: {
         type: 'light',
         primary: {
-            main: '#44A574',
+            main: '#44A574'
         },
         secondary: {
-            main: 'rgb(57,140,95)',
+            main: 'rgb(57,140,95)'
         },
         background: {
             default: '#141C23',
-            paper: '#232A2E',
+            paper: '#232A2E'
         },
         text: {
             primary: 'rgba(255,255,255,0.85)',
             secondary: 'rgba(255,255,255,0.55)',
             disabled: 'rgba(255,255,255,0.38)',
-            hint: 'rgba(255,255,255,0.38)',
+            hint: 'rgba(255,255,255,0.38)'
         },
-        divider: 'rgba(255,255,255,0.5)',
-    },
+        divider: 'rgba(255,255,255,0.5)'
+    }
 });
 
 function App() {

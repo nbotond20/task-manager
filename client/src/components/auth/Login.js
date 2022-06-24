@@ -104,7 +104,7 @@ const Login = () => {
                         id="username"
                         name="username"
                         value={data.username}
-                        label="Username"
+                        label="Email"
                         autoFocus
                         error={errors.username !== undefined}
                         helperText={errors.username}

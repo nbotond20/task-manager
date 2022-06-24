@@ -7,9 +7,7 @@ import { InputAdornment, TextField } from '@mui/material';
 
 export default function SearchBar({ search, setSearch }) {
     return (
-        <div
-            className={style.searchBar}
-        >
+        <div className={style.searchBar}>
             <TextField
                 color="primary"
                 id="outlined-basic"
@@ -28,7 +26,7 @@ export default function SearchBar({ search, setSearch }) {
                                     sx={{ p: '10px' }}
                                     aria-label="search"
                                 >
-                                    <SearchIcon color="secondary"/>
+                                    <SearchIcon color="secondary" />
                                 </IconButton>
                             ) : (
                                 <IconButton
@@ -36,7 +34,7 @@ export default function SearchBar({ search, setSearch }) {
                                     aria-label="cancel"
                                     onClick={() => setSearch('')}
                                 >
-                                    <CloseIcon color="secondary"/>
+                                    <CloseIcon color="secondary" />
                                 </IconButton>
                             )}
                         </InputAdornment>

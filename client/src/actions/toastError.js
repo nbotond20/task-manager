@@ -1,6 +1,6 @@
-import { toast } from "react-toastify";
+import { toast } from 'react-toastify';
 
-const toastError = (msg='Default message', time=2000) => {
+const toastError = (msg = 'Default message', time = 2000) => {
     toast.error(msg, {
         position: 'bottom-left',
         autoClose: time,
@@ -10,9 +10,9 @@ const toastError = (msg='Default message', time=2000) => {
         draggable: true,
         progress: undefined,
         style: {
-            background: '#FDEDED',
+            background: '#FDEDED'
         }
     });
-}
+};
 
 export default toastError;

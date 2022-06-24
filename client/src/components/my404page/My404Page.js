@@ -1,14 +1,14 @@
-import { Button } from "@mui/material";
-import { useNavigate } from "react-router-dom";
-import useDocumentTitle from "../../services/useDocumentTitle";
-import CardContainer from "../utils/CardContainer";
-import CenterContainer from "../utils/CenterContainer";
-import style from "./css/My404Page.module.css";
+import { Button } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import useDocumentTitle from '../../services/useDocumentTitle';
+import CardContainer from '../utils/CardContainer';
+import CenterContainer from '../utils/CenterContainer';
+import style from './css/My404Page.module.css';
 
 const My404Page = () => {
     const naigate = useNavigate();
 
-    useDocumentTitle("Task-Manager - 404");
+    useDocumentTitle('Task-Manager - 404');
 
     return (
         <CardContainer>
@@ -16,11 +16,13 @@ const My404Page = () => {
                 <div className={style.container}>
                     <h1 className={style.title}>404</h1>
                     <p className={style.description}>Page not found!</p>
-                    <Button variant="contained" onClick={() => naigate('/')}>Go back</Button>
+                    <Button variant="contained" onClick={() => naigate('/')}>
+                        Go back
+                    </Button>
                 </div>
             </CenterContainer>
         </CardContainer>
     );
-}
+};
 
 export default My404Page;

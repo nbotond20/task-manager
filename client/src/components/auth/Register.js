@@ -110,12 +110,14 @@ const Register = () => {
                         onChange={handleChange}
                     />
                     <br />
-                    <div style={{
-                        position: 'relative',
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center'
-                    }}>
+                    <div
+                        style={{
+                            position: 'relative',
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center'
+                        }}
+                    >
                         <TextField
                             variant="outlined"
                             type={showPassword ? 'text' : 'password'}
@@ -136,7 +138,7 @@ const Register = () => {
                             color="secondary"
                             style={{
                                 position: 'absolute',
-                                right: '16.5px',
+                                right: '16.5px'
                             }}
                         >
                             {showPassword ? <VisibilityOff /> : <Visibility />}

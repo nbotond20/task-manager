@@ -81,7 +81,7 @@ const TaskLists = ({ itemPerPage = 10, loadingTime = 1500 }) => {
                     aria-label="collapsible table"
                     sx={{
                         boxShadow: 'none',
-                        margin: '0',
+                        margin: '0'
                     }}
                 >
                     <TableHead>

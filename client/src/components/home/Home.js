@@ -70,7 +70,7 @@ const Home = () => {
                             fontWeight: 'bold'
                         }}
                     >
-                        <Title/>
+                        <Title />
                     </Typography>
                     <Typography variant="h6" color="secondary">
                         Easy to use. Easy to manage.

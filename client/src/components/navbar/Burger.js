@@ -62,9 +62,7 @@ const Burger = ({
                 {editing !== null && (
                     <Link to={'/edit'} style={linkStyle}>
                         <MenuItem onClick={handleCloseNavMenu}>
-                            <Typography textAlign="center">
-                                Edit
-                            </Typography>
+                            <Typography textAlign="center">Edit</Typography>
                         </MenuItem>
                     </Link>
                 )}

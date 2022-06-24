@@ -69,11 +69,7 @@ const Header = ({ control, watch, editing }) => {
                             variant="outlined"
                         />
                     ) : (
-                        <Chip
-                            label="Draft"
-                            color="info"
-                            variant="outlined"
-                        />
+                        <Chip label="Draft" color="info" variant="outlined" />
                     )}
                 </div>
             </div>

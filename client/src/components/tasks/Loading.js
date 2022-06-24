@@ -22,17 +22,16 @@ const Loading = ({ count }) => {
                     in={true}
                     {...(true ? { timeout: 250 * index } : {})}
                     key={index}
-                    
                 >
                     <Accordion
                         sx={{
                             boxShadow: 'none',
                             margin: '0',
-                            border: 'none',
+                            border: 'none'
                         }}
                     >
                         <AccordionSummary
-                            expandIcon={<ExpandMoreIcon color="secondary"/>}
+                            expandIcon={<ExpandMoreIcon color="secondary" />}
                             sx={{
                                 boxShadow: 'none'
                             }}

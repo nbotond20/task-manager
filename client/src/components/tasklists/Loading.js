@@ -1,4 +1,4 @@
-import { Grow, IconButton, Skeleton, TableCell, TableRow } from "@mui/material";
+import { Grow, IconButton, Skeleton, TableCell, TableRow } from '@mui/material';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 const Loading = ({ count }) => {
@@ -9,7 +9,7 @@ const Loading = ({ count }) => {
                 <Grow
                     direction="up"
                     in={true}
-                    {...(true ? { timeout: 250 * (index + 1)  } : {})}
+                    {...(true ? { timeout: 250 * (index + 1) } : {})}
                     key={index}
                 >
                     <TableRow
@@ -18,7 +18,7 @@ const Loading = ({ count }) => {
                     >
                         <TableCell>
                             <IconButton aria-label="expand row" size="small">
-                                <KeyboardArrowDownIcon color="secondary"/>
+                                <KeyboardArrowDownIcon color="secondary" />
                             </IconButton>
                         </TableCell>
                         <TableCell component="th" scope="row">

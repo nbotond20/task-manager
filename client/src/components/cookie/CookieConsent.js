@@ -11,7 +11,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function CookieConsent({ open=false }) {
+export default function CookieConsent({ open = false }) {
     const [openDialog, setOpenDialog] = React.useState(open);
 
     const handleClose = () => {
@@ -21,7 +21,7 @@ export default function CookieConsent({ open=false }) {
     const handleAccept = () => {
         setOpenDialog(false);
         localStorage.setItem('cookieConsent', 'accepted');
-    }
+    };
 
     React.useEffect(() => {
         localStorage.getItem('cookieConsent')

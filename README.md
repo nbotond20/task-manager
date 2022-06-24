@@ -2,7 +2,10 @@
 
 ## Demo
 
-A weboldal elérhető a _https://nbotond.netlify.app/_ címen.
+- A weboldal elérhető a _https://nbotond.netlify.app/_ címen.
+- A szerver a https://nbotond-task-manager-api.herokuapp.com/ címen érhető el.
+
+Mind a frontendhez és a backendhez CD (Continous Deployment) be van állítva ami ehhez a github oldalhoz van kötve.
 
 ## Telepítés
 
@@ -166,7 +169,7 @@ A bejelentkezett felhasználó adatai jelennek meg.
 - Feladatsorok száma
 - Kijelentkezés gomb
 
-### Szerver
+## Szerver
 
 Három szolgáltatás van kivezetve:
 

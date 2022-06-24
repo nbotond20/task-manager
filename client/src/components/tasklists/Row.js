@@ -42,7 +42,6 @@ const Row = ({
         return 0;
     }
 
-
     return (
         <>
             {row && tasks && (

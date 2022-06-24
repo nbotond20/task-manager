@@ -65,7 +65,7 @@ const useTasksService = ({ itemPerPage }) => {
     };
 
     const [search, setSearch] = React.useState('');
-    
+
     const filterdData = React.useMemo(() => {
         return data?.tasks?.filter((task) => {
             return (

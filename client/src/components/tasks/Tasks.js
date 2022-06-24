@@ -32,8 +32,8 @@ export default function Tasks({ itemPerPage = 10, loadingTime = 1500 }) {
         setLoading,
         handleSelect,
         handleExpand,
-        handlePageChange,
-       /*  handleDelete */
+        handlePageChange
+        /*  handleDelete */
     } = useTasksService({ itemPerPage });
 
     setTimeout(() => {

@@ -6,3 +6,4 @@ call npm i
 cd ..
 cd scripts
 call start.bat
+cd ..
