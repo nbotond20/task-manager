@@ -15,6 +15,7 @@ import { Link } from 'react-router-dom';
 import style from './css/Edit.module.css';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useState } from 'react';
+import { motion } from 'framer-motion';
 
 const EditTable = ({
     tasks,
@@ -25,6 +26,8 @@ const EditTable = ({
     handlePageChange
 }) => {
     const [taskDeleteId, setTaskDeleteId] = useState(null);
+
+    const [startPosition, setStartPosition] = useState(null);
 
     return (
         <div className={style.tableContainer}>
@@ -55,6 +58,26 @@ const EditTable = ({
                                                 ? style.delete
                                                 : ''
                                         }
+                                        style={{
+                                            cursor: 'pointer'
+                                        }}
+                                        component={motion.tr}
+                                        drag="x"
+                                        dragSnapToOrigin={true}
+                                        onDragStart={(event, info) =>
+                                            setStartPosition(info.offset.x)
+                                        }
+                                        onDragEnd={(event, info) => {
+                                            if (
+                                                info.offset.x >
+                                                startPosition + 200
+                                            ) {
+                                                handleDelete(task.id);
+                                                console.log('delete');
+                                            }
+                                            setStartPosition(null);
+                                        }}
+                                        whileDrag={{ cursor: 'grabbing' }}
                                     >
                                         <TableCell align="left">
                                             {task.title}

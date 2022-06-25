@@ -54,11 +54,13 @@ const Row = ({
                         <TableRow
                             sx={{
                                 borderCollapse: 'collapse',
-                                '& > *': { borderBottom: 'unset' }
+                                '& > *': { borderBottom: 'unset' },
+                                cursor: 'pointer'
                             }}
                             className={
                                 rowDeleteId === row.id ? style.delete : ''
                             }
+                            onClick={() => setOpen(!open)}
                         >
                             <TableCell>
                                 <IconButton
@@ -128,7 +130,7 @@ const Row = ({
                                 </Button>
                                 <Button
                                     onClick={(e) => {
-                                        handleDeleteFromRow(row.id, e);
+                                        handleDeleteFromRow(row.id);
                                         setRowDeleteId(row.id);
                                     }}
                                 >

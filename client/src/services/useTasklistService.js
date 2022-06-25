@@ -119,7 +119,7 @@ const useTasklistService = ({ itemPerPage }) => {
 
     const userId = useSelector(selectUserId);
     const [deleteTaskList] = useDeleteTaskListMutation();
-    const handleDeleteFromRow = async (taskListID, e) => {
+    const handleDeleteFromRow = async (taskListID) => {
         setTimeout(async () => {
             await deleteTaskList(taskListID);
         }, 600);
