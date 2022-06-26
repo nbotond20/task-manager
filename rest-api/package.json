@@ -20,8 +20,8 @@
     "config": "config/"
   },
   "engines": {
-    "node": "^17.0.0",
-    "npm": ">= 3.0.0"
+    "node": "^16.0.0",
+    "npm": ">= 5.0.0"
   },
   "scripts": {
     "test": "npm run lint && npm run mocha",
@@ -40,7 +40,6 @@
     "@feathersjs/authentication": "^4.5.14",
     "@feathersjs/authentication-local": "^4.5.14",
     "@feathersjs/authentication-oauth": "^4.5.14",
-    "@feathersjs/cli": "^4.7.0",
     "@feathersjs/configuration": "^4.5.12",
     "@feathersjs/errors": "^4.5.12",
     "@feathersjs/express": "^4.5.14",
