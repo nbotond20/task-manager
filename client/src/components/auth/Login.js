@@ -33,8 +33,13 @@ const Login = () => {
         const { username, password } = data;
         const newErrors = {};
 
+        if (
+            !username.match(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/)
+        ) {
+            newErrors.username = 'Must be a valid email';
+        }
         if (username === '') {
-            newErrors.username = 'Username is required';
+            newErrors.username = 'Email is required';
         }
         if (password === '') {
             newErrors.password = 'Password is required';
@@ -62,7 +67,8 @@ const Login = () => {
             dispatch(loadTasklist(result.user.id));
             navigate('/', { replace: true });
         } catch (err) {
-            newErrors.username = 'Login error';
+            newErrors.username = 'Invalid email or password';
+            newErrors.password = '';
             setErrors({ ...newErrors });
         }
     };
@@ -100,7 +106,7 @@ const Login = () => {
                     <h1 className={style.title}>Login</h1>
                     <TextField
                         variant="outlined"
-                        type="text"
+                        type="username"
                         id="username"
                         name="username"
                         value={data.username}

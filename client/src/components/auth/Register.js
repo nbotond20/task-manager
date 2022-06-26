@@ -27,11 +27,28 @@ const Register = () => {
         const { username, password, fullname } = data;
         const newErrors = {};
 
+        if (
+            !username.match(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/)
+        ) {
+            newErrors.username = 'Must be a valid email';
+        }
         if (username === '') {
-            newErrors.username = 'Username is required';
+            newErrors.username = 'Email is required';
+        }
+        if (!/\d/.test(password)) {
+            newErrors.password = 'Must contain a number';
+        }
+        if (password.length > 50) {
+            newErrors.password = 'Must be less than 50 characters';
+        }
+        if (password.length < 6) {
+            newErrors.password = 'Must be at least 6 characters';
         }
         if (password === '') {
             newErrors.password = 'Password is required';
+        }
+        if (fullname.trim().split(' ').length < 2) {
+            newErrors.fullname = 'Must be at least 2 words';
         }
         if (fullname === '') {
             newErrors.fullname = 'Fullname is required';
@@ -53,7 +70,7 @@ const Register = () => {
             navigate('/login', { replace: true });
             toastSuccess('Successful registration!');
         } catch (err) {
-            newErrors.username = 'Register error';
+            newErrors.username = 'Email already exists';
             setErrors({ ...newErrors });
         }
     };
@@ -85,69 +102,90 @@ const Register = () => {
             <CenterContainer>
                 <form onSubmit={handleSubmit} className={style.form}>
                     <h1 className={style.title}>Register</h1>
-                    <TextField
-                        variant="outlined"
-                        type="text"
-                        id="fullname"
-                        name="fullname"
-                        value={data.fullname}
-                        label="Full Name"
-                        autoFocus
-                        error={errors.fullname !== undefined}
-                        helperText={errors.fullname}
-                        onChange={handleChange}
-                    />
-                    <br />
-                    <TextField
-                        variant="outlined"
-                        type="username"
-                        id="username"
-                        name="username"
-                        value={data.username}
-                        label="Email"
-                        error={errors.username !== undefined}
-                        helperText={errors.username}
-                        onChange={handleChange}
-                    />
-                    <br />
-                    <div
-                        style={{
-                            position: 'relative',
-                            display: 'flex',
-                            justifyContent: 'center',
-                            alignItems: 'center'
-                        }}
-                    >
+                    <div className={style.formDiv}>
                         <TextField
                             variant="outlined"
-                            type={showPassword ? 'text' : 'password'}
-                            id="password"
-                            name="password"
-                            value={data.password}
-                            label="Password"
-                            error={errors.password !== undefined}
-                            helperText={errors.password}
+                            type="text"
+                            id="fullname"
+                            name="fullname"
+                            value={data.fullname}
+                            label="Full Name"
+                            autoFocus
+                            error={errors.fullname !== undefined}
+                            helperText={errors.fullname}
                             onChange={handleChange}
-                            color="secondary"
                         />
-                        <IconButton
-                            aria-label="toggle password visibility"
-                            onClick={handleClickShowPassword}
-                            onMouseDown={handleMouseDownPassword}
-                            edge="end"
-                            color="secondary"
+                        <TextField
+                            variant="outlined"
+                            type="email"
+                            id="username"
+                            name="username"
+                            value={data.username}
+                            label="Email"
+                            error={errors.username !== undefined}
+                            helperText={errors.username}
+                            onChange={handleChange}
+                            inputProps={{
+                                autoComplete: 'new-password',
+                                form: {
+                                    autoComplete: 'off'
+                                }
+                            }}
+                        />
+                        <div
                             style={{
-                                position: 'absolute',
-                                right: '16.5px'
+                                position: 'relative',
+                                display: 'flex',
+                                justifyContent: 'center',
+                                alignItems: 'center'
                             }}
                         >
-                            {showPassword ? <VisibilityOff /> : <Visibility />}
-                        </IconButton>
+                            <TextField
+                                variant="outlined"
+                                type={showPassword ? 'text' : 'password'}
+                                id="password"
+                                name="password"
+                                value={data.password}
+                                label="Password"
+                                error={errors.password !== undefined}
+                                helperText={errors.password}
+                                onChange={handleChange}
+                                color="secondary"
+                                inputProps={{
+                                    autoComplete: 'new-password',
+                                    form: {
+                                        autoComplete: 'off'
+                                    }
+                                }}
+                            />
+                            <IconButton
+                                aria-label="toggle password visibility"
+                                onClick={handleClickShowPassword}
+                                onMouseDown={handleMouseDownPassword}
+                                edge="end"
+                                color="secondary"
+                                style={{
+                                    position: 'absolute',
+                                    right: '16.5px'
+                                }}
+                            >
+                                {showPassword ? (
+                                    <VisibilityOff />
+                                ) : (
+                                    <Visibility />
+                                )}
+                            </IconButton>
+                        </div>
+                        <Button
+                            variant="contained"
+                            type="submit"
+                            style={{
+                                marginTop: '16px'
+                            }}
+                        >
+                            Register
+                        </Button>
                     </div>
-                    <br />
-                    <Button variant="contained" type="submit">
-                        Register
-                    </Button>
                     <span className={style.login}>
                         Already have an account?{' '}
                         <Link

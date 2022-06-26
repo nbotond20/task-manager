@@ -2,7 +2,7 @@
 
 ## Demo
 
-- A weboldal elérhető a _https://nbotond.netlify.app/_ címen.
+- A weboldal elérhető a _https://nbotond.netlify.app/_ címen. [![Netlify Status](https://api.netlify.com/api/v1/badges/153c5a82-e670-418b-bc83-5e509e770d9c/deploy-status)](https://app.netlify.com/sites/nbotond/deploys)
 - A szerver a https://nbotond-task-manager-api.herokuapp.com/ címen érhető el.
 
 Mind a frontendhez és a backendhez CD (Continous Deployment) be van állítva ami ehhez a github oldalhoz van kötve.

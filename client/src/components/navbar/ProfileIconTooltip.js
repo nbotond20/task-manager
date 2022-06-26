@@ -6,7 +6,7 @@ const ProfileIconTooltip = ({ handleOpenUserMenu, user }) => {
             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar
                     children={
-                        user
+                        user && user?.fullname.split(' ').length > 1
                             ? `${user?.fullname.split(' ')[0][0]}${
                                   user?.fullname.split(' ')[1][0]
                               }`
