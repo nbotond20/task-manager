@@ -7,7 +7,7 @@
 
 ### Demo Felhasználó
 - Email: `user1@feladatsor.hu`
-- Jelszó: `user1`
+- Jelszó: `user1` 
 
 Mind a frontendhez és a backendhez CD (Continous Deployment) be van állítva ami ehhez a github oldalhoz van kötve.
 
